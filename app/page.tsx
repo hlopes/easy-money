@@ -2,7 +2,6 @@ import { getBankAccounts } from '@/services/bankAccounts';
 
 export default async function Home() {
   const bankAccounts = await getBankAccounts();
-  console.log('### rows', bankAccounts);
 
   return (
     <main>
