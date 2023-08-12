@@ -1,5 +1,6 @@
 import { Insertable, Selectable, Updateable } from 'kysely';
-import { BankAccounts } from 'kysely-codegen';
+
+import { BankAccounts } from '@/lib/db.d';
 
 export type BankAccount = Selectable<BankAccounts>;
 export type NewBankAccount = Insertable<BankAccounts>;
