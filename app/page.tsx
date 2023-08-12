@@ -34,7 +34,11 @@ export default async function Home() {
                   <td>{bankAccount.name}</td>
                   <td>{bankAccount.initialValue}</td>
                   <td>{bankAccount.notes}</td>
-                  <td>{bankAccount.createdAt}</td>
+                  <td>
+                    {!!bankAccount.createdAt
+                      ? bankAccount.createdAt.toISOString()
+                      : ''}
+                  </td>
                   <td className="flex gap-2 justify-end">
                     <button className="btn btn-sm btn-circle">
                       <LuEdit3 />
