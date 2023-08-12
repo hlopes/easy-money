@@ -1,55 +1,61 @@
-import db from '@/lib/db';
-import { BankAccount, BankAccountUpdate, NewBankAccount } from './_types';
+import { BankAccount, Prisma } from '@prisma/client';
+
+import { prisma } from '@/lib/prisma';
 
 export async function findBankAccountById(id: string) {
-  return await db
-    .selectFrom('bank_accounts')
-    .where('id', '=', id)
-    .selectAll()
-    .executeTakeFirst();
+  return await prisma.bankAccount.findUnique({
+    where: {
+      id,
+    },
+  });
 }
 
-export async function findBankAccount(criteria: Partial<BankAccount>) {
-  let query = db.selectFrom('bank_accounts');
-
-  if (criteria.id) {
-    query = query.where('id', '=', criteria.id); // Kysely is immutable, you must re-assign!
-  }
-
-  if (criteria.name) {
-    query = query.where('name', '=', criteria.name);
-  }
-
-  if (criteria.created_at) {
-    query = query.where('created_at', '=', criteria.created_at);
-  }
-
-  return await query.selectAll().execute();
+export async function findBankAccount(criteria?: Partial<BankAccount>) {
+  return await prisma.bankAccount.findMany({
+    where: {
+      ...(criteria ?? {}),
+    },
+  });
 }
 
 export async function updateBankAccount(
   id: string,
-  updateWith: BankAccountUpdate
+  updateWith: Prisma.BankAccountUpdateInput
 ) {
-  await db
-    .updateTable('bank_accounts')
-    .set(updateWith)
-    .where('id', '=', id)
-    .execute();
+  try {
+    const updatedUser = await prisma.bankAccount.update({
+      where: { id },
+      data: { ...updateWith },
+    });
+
+    return updatedUser;
+  } catch (error) {
+    console.error('Error updating bank account:', error);
+
+    throw error;
+  }
 }
 
-export async function createBankAccount(bankAccount: NewBankAccount) {
-  return await db
-    .insertInto('bank_accounts')
-    .values(bankAccount)
-    .returningAll()
-    .executeTakeFirstOrThrow();
+export async function createBankAccount(
+  bankAccount: Prisma.BankAccountCreateInput
+) {
+  try {
+    const newBankAccount = await prisma.bankAccount.create({
+      data: {
+        ...bankAccount,
+      },
+    });
+
+    return newBankAccount;
+  } catch (error) {
+    console.error('Error updating bank account:', error);
+
+    throw error;
+  }
 }
 
 export async function deleteBankAccount(id: string) {
-  return await db
-    .deleteFrom('bank_accounts')
-    .where('id', '=', id)
-    .returningAll()
-    .executeTakeFirst();
+  return await prisma.bankAccount.delete({
+    where: { id },
+  });
 }
