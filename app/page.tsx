@@ -2,7 +2,7 @@ import { LuPlus } from 'react-icons/lu';
 
 import { getBankAccounts } from '@/services/bankAccounts';
 
-import { BankAccountsTableActions } from './_components';
+import { BankAccountsTableActions } from '@/app/_components';
 
 export default async function Home() {
   const bankAccounts = await getBankAccounts();

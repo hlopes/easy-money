@@ -3,6 +3,7 @@
 import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuEdit3, LuEraser } from 'react-icons/lu';
+import cs from 'classnames';
 
 import { deleteBankAccount } from '@/services/bankAccounts';
 
@@ -17,8 +18,6 @@ export default function BankAccountsTableActions({
 
   const [isPending, startTransition] = useTransition();
 
-  console.log('### isPending', isPending);
-
   const handleDelete = async () => {
     deleteBankAccount(bankAccountId);
 
@@ -31,11 +30,26 @@ export default function BankAccountsTableActions({
 
   return (
     <>
-      <button className="btn btn-sm btn-circle">
-        <LuEdit3 />
+      <button
+        className={cs('btn btn-sm btn-circle', {
+          ['btn-disabled']: isPending,
+        })}>
+        {isPending ? (
+          <span className="loading loading-spinner loading-sm" />
+        ) : (
+          <LuEdit3 />
+        )}
       </button>
-      <button className="btn btn-sm btn-circle">
-        <LuEraser onClick={() => handleDelete()} />
+      <button
+        onClick={() => handleDelete()}
+        className={cs('btn btn-sm btn-circle', {
+          ['btn-disabled']: isPending,
+        })}>
+        {isPending ? (
+          <span className="loading loading-spinner loading-sm" />
+        ) : (
+          <LuEraser />
+        )}
       </button>
     </>
   );
