@@ -8,3 +8,11 @@ export async function getBankAccounts(): Promise<BankAccount[]> {
 
   return await result.json();
 }
+
+export async function deleteBankAccount(bankAccountId: string): Promise<void> {
+  const result = await fetch(`${apiBaseUrl}/bank-accounts/${bankAccountId}`, {
+    method: 'delete',
+  });
+
+  return await result.json();
+}

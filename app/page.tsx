@@ -1,6 +1,8 @@
-import { LuEdit3, LuEraser, LuPlus } from 'react-icons/lu';
+import { LuPlus } from 'react-icons/lu';
 
 import { getBankAccounts } from '@/services/bankAccounts';
+
+import { BankAccountsTableActions } from './_components';
 
 export default async function Home() {
   const bankAccounts = await getBankAccounts();
@@ -36,12 +38,7 @@ export default async function Home() {
                   <td>{bankAccount.notes}</td>
                   <td>{new Date(bankAccount.createdAt).toISOString()}</td>
                   <td className="flex gap-2 justify-end">
-                    <button className="btn btn-sm btn-circle">
-                      <LuEdit3 />
-                    </button>
-                    <button className="btn btn-sm btn-circle">
-                      <LuEraser />
-                    </button>
+                    <BankAccountsTableActions bankAccountId={bankAccount.id} />
                   </td>
                 </tr>
               );
