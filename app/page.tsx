@@ -1,8 +1,9 @@
-import { LuPlus } from 'react-icons/lu';
-
 import { getBankAccounts } from '@/services/bankAccounts';
 
-import { BankAccountsTableActions } from '@/app/_components';
+import {
+  BankAccountsTableActions,
+  BankAccountsAddButton,
+} from '@/app/_components';
 
 export default async function Home() {
   const bankAccounts = await getBankAccounts();
@@ -12,12 +13,7 @@ export default async function Home() {
       <article className="prose my-2">
         <h2>Bank Accounts</h2>
       </article>
-      <div className="text-right">
-        <button className="btn btn-sm">
-          <LuPlus />
-          Add New
-        </button>
-      </div>
+      <BankAccountsAddButton />
       <div className="overflow-x-auto my-2">
         <table className="table">
           <thead>
@@ -34,7 +30,7 @@ export default async function Home() {
               return (
                 <tr key={bankAccount.id}>
                   <td>{bankAccount.name}</td>
-                  <td>{bankAccount.initialValue}</td>
+                  <td>{bankAccount.balance}</td>
                   <td>{bankAccount.notes}</td>
                   <td>{new Date(bankAccount.createdAt).toISOString()}</td>
                   <td className="flex gap-2 justify-end">
