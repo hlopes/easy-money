@@ -1,8 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -22,10 +20,6 @@ interface BankAccountFormProps {
 export default function BankAccountForm({
   onCloseModal,
 }: BankAccountFormProps) {
-  const router = useRouter();
-
-  const [isPending, startTransition] = useTransition();
-
   const {
     register,
     reset,
@@ -45,17 +39,14 @@ export default function BankAccountForm({
     const newAccount = await createBankAccount(data);
 
     if (!!newAccount.id) {
-      startTransition(() => {
-        onCloseModal();
-        reset();
-
-        router.refresh();
-      });
+      onCloseModal();
+      reset();
     }
   };
 
   return (
     <form
+      autoComplete="off"
       method="dialog"
       className="flex flex-col gap-2 modal-box h-[500px]"
       onSubmit={handleSubmit(onSubmit)}>
@@ -131,12 +122,7 @@ export default function BankAccountForm({
           {...register('notes')}
         />
       </div>
-      <button
-        className={cs('btn btn-sm md:self-end', {
-          ['btn-disabled']: isPending,
-        })}>
-        Save
-      </button>
+      <button className="btn btn-sm md:self-end">Save</button>
     </form>
   );
 }
