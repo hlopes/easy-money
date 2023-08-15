@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { commonStringValidator } from '@/app/_helpers/validators';
+import { commonStringValidator } from '../../helpers/validators';
 
 export default yup.object({
   name: yup.string().required(),

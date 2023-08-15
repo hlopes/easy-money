@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import cs from 'classnames';
 
-import { createBankAccount } from '@/app/_server-actions/bankAccounts';
+import { createBankAccount } from '../../server-actions/bankAccounts';
 
 import schema from './schema';
 

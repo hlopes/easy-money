@@ -2,7 +2,7 @@
 
 import { LuEdit3, LuEraser } from 'react-icons/lu';
 
-import { deleteBankAccount } from '@/app/_server-actions/bankAccounts';
+import { deleteBankAccount } from '../server-actions/bankAccounts';
 
 interface BankAccountTableActionsProps {
   bankAccountId: string;

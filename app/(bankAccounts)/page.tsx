@@ -1,6 +1,5 @@
-import { getBankAccounts } from '@/app/_server-actions/bankAccounts';
-
-import { BankAccountsAddButton, BankAccountsTable } from '@/app/_components';
+import { getBankAccounts } from './server-actions/bankAccounts';
+import { BankAccountsAddButton, BankAccountsTable } from './components';
 
 export default async function Home() {
   const bankAccounts = await getBankAccounts();
