@@ -1,3 +1,5 @@
+'use server';
+
 import { apiBaseUrl } from '@/config/vars';
 import { BankAccount } from '@prisma/client';
 
