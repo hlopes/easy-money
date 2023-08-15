@@ -10,6 +10,7 @@ datasource db {
 model BankAccount {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String   @db.VarChar(100)
+  date      DateTime
   balance   Float?   @default(0)
   notes     String?  @db.VarChar(500)
   createdAt DateTime @default(now())

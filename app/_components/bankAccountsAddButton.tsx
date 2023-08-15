@@ -9,7 +9,7 @@ export default function BankAccountsAddButton() {
     typeof window === 'undefined'
       ? null
       : (window as unknown as {
-          newBankAccountModal: { showModal: () => void } | undefined;
+          newBankAccountModal: HTMLDialogElement | undefined;
         });
 
   return (
@@ -23,7 +23,9 @@ export default function BankAccountsAddButton() {
       <dialog
         id="newBankAccountModal"
         className="modal modal-bottom sm:modal-middle">
-        <BankAccountForm />
+        <BankAccountForm
+          onCloseModal={() => globalForModal?.newBankAccountModal?.close()}
+        />
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>

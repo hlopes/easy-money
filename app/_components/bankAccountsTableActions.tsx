@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { LuEdit3, LuEraser } from 'react-icons/lu';
 import cs from 'classnames';
 
-import { deleteBankAccount } from '@/services/bankAccounts';
+import { deleteBankAccount } from '@/app/_server-actions/bankAccounts';
 
 interface BankAccountTableActionsProps {
   bankAccountId: string;

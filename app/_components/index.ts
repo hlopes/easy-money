@@ -1,2 +1,2 @@
-export { default as BankAccountsTableActions } from './bankAccountsTableActions';
-export { default as BankAccountsAddButton } from './bankAccountsAddButton';
+export { default as BankAccountsAddButton } from './BankAccountsAddButton';
+export { default as BankAccountsTable } from './BankAccountsTable';

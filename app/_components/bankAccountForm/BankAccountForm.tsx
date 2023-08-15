@@ -1,43 +1,34 @@
 'use client';
 
+import { useTransition } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import cs from 'classnames';
-import Image from 'next/image';
 
-let patternTwoDigitsAfterComma = /^\d+(\.\d{0,2})?$/;
+import { createBankAccount } from '@/app/_server-actions/bankAccounts';
 
-const commonStringValidator = yup
-  .number()
-  .positive()
-  .test(
-    'is-decimal',
-    'The amount should be a decimal with maximum two digits after comma',
-    (val: any) => {
-      if (val != undefined) {
-        return patternTwoDigitsAfterComma.test(val);
-      }
-
-      return true;
-    }
-  )
-  .min(1)
-  .required();
-
-const schema = yup.object({
-  name: yup.string().required(),
-  date: yup.date().required(),
-  notes: yup.string().optional(),
-  balance: commonStringValidator,
-});
+import schema from './schema';
 
 type BankAccountFormData = yup.InferType<typeof schema>;
 
-export default function BankAccountForm() {
+interface BankAccountFormProps {
+  onCloseModal(): void;
+}
+
+export default function BankAccountForm({
+  onCloseModal,
+}: BankAccountFormProps) {
+  const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
+
   const {
     register,
+    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -50,7 +41,18 @@ export default function BankAccountForm() {
     },
   });
 
-  const onSubmit = (data: BankAccountFormData) => console.log(data);
+  const onSubmit = async (data: BankAccountFormData) => {
+    const newAccount = await createBankAccount(data);
+
+    if (!!newAccount.id) {
+      startTransition(() => {
+        onCloseModal();
+        reset();
+
+        router.refresh();
+      });
+    }
+  };
 
   return (
     <form
@@ -68,6 +70,7 @@ export default function BankAccountForm() {
           className={cs('input input-bordered input-md w-full', {
             ['input-error']: !!errors.name,
           })}
+          maxLength={100}
           {...register('name')}
         />
       </div>
@@ -124,10 +127,16 @@ export default function BankAccountForm() {
             ['input-error']: !!errors.name,
           })}
           placeholder="Bank account notes"
+          maxLength={500}
           {...register('notes')}
         />
       </div>
-      <button className="btn btn-sm md:self-end">Save</button>
+      <button
+        className={cs('btn btn-sm md:self-end', {
+          ['btn-disabled']: isPending,
+        })}>
+        Save
+      </button>
     </form>
   );
 }

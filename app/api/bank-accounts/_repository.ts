@@ -18,24 +18,6 @@ export async function findBankAccount(criteria?: Partial<BankAccount>) {
   });
 }
 
-export async function updateBankAccount(
-  id: string,
-  updateWith: Prisma.BankAccountUpdateInput
-) {
-  try {
-    const updatedUser = await prisma.bankAccount.update({
-      where: { id },
-      data: { ...updateWith },
-    });
-
-    return updatedUser;
-  } catch (error) {
-    console.error('Error updating bank account:', error);
-
-    throw error;
-  }
-}
-
 export async function createBankAccount(
   bankAccount: Prisma.BankAccountCreateInput
 ) {
@@ -47,6 +29,24 @@ export async function createBankAccount(
     });
 
     return newBankAccount;
+  } catch (error) {
+    console.error('Error updating bank account:', error);
+
+    throw error;
+  }
+}
+
+export async function updateBankAccount(
+  id: string,
+  updateWith: Prisma.BankAccountUpdateInput
+) {
+  try {
+    const updatedUser = await prisma.bankAccount.update({
+      where: { id },
+      data: { ...updateWith },
+    });
+
+    return updatedUser;
   } catch (error) {
     console.error('Error updating bank account:', error);
 
