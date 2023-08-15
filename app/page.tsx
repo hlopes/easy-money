@@ -5,6 +5,14 @@ import {
   BankAccountsAddButton,
 } from '@/app/_components';
 
+function formatDateToDisplay(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${day}-${month}-${year}`;
+}
+
 export default async function Home() {
   const bankAccounts = await getBankAccounts();
 
@@ -32,7 +40,9 @@ export default async function Home() {
                   <td>{bankAccount.name}</td>
                   <td>{bankAccount.balance}</td>
                   <td>{bankAccount.notes}</td>
-                  <td>{new Date(bankAccount.createdAt).toISOString()}</td>
+                  <td>
+                    {formatDateToDisplay(new Date(bankAccount.createdAt))}
+                  </td>
                   <td className="flex gap-2 justify-end">
                     <BankAccountsTableActions bankAccountId={bankAccount.id} />
                   </td>
