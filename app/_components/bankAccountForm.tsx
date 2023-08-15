@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import cs from 'classnames';
+import Image from 'next/image';
 
 let patternTwoDigitsAfterComma = /^\d+(\.\d{0,2})?$/;
 
@@ -57,9 +58,6 @@ export default function BankAccountForm() {
       className="flex flex-col gap-2 modal-box h-[500px]"
       onSubmit={handleSubmit(onSubmit)}>
       <h3 className="font-bold text-lg">New bank account</h3>
-      <p className="mt-2 mb-6 text-xs">
-        Press ESC key or click outside to close
-      </p>
       <div>
         <label className="label">
           <span className="label-text">Name</span>
@@ -98,7 +96,7 @@ export default function BankAccountForm() {
           <div className="relative w-60">
             <input
               type="number"
-              placeholder="Value"
+              placeholder="Initial balance"
               className={cs('input input-bordered input-md w-full pr-20', {
                 ['input-error']: !!errors.balance,
               })}
@@ -107,12 +105,12 @@ export default function BankAccountForm() {
             />
             <p
               className={cs(
-                'absolute top-0 right-0 bg-slate-600 leading-none h-full rounded-r-md p-4 border',
+                'absolute top-0 right-0 bg-slate-600 leading-none h-full rounded-r-md border overflow-hidden',
                 {
                   ['border-error']: !!errors.balance,
                 }
               )}>
-              EUR(€)
+              <Image src="/eu.svg" alt="euro flag" width="45" height="45" />
             </p>
           </div>
         </div>
