@@ -24,20 +24,17 @@ const commonStringValidator = yup
   .min(1)
   .required();
 
-const schema = yup
-  .object()
-  .shape({
-    name: yup.string().required(),
-    date: yup.date().required(),
-    notes: yup.string().optional(),
-    balance: commonStringValidator,
-  })
-  .required();
+const schema = yup.object({
+  name: yup.string().required(),
+  date: yup.date().required(),
+  notes: yup.string().optional(),
+  balance: commonStringValidator,
+});
 
 type BankAccountFormData = yup.InferType<typeof schema>;
 
 export default function BankAccountForm() {
-  const { register, control, handleSubmit } = useForm<BankAccountFormData>({
+  const { register, control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       name: '',
