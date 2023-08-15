@@ -7,9 +7,10 @@ import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import cs from 'classnames';
 
-import { createBankAccount } from '../../server-actions/bankAccounts';
+import { createBankAccount } from '../../actions/bankAccounts';
 
 import schema from './schema';
+import { useTransition } from 'react';
 
 type BankAccountFormData = yup.InferType<typeof schema>;
 
@@ -20,6 +21,8 @@ interface BankAccountFormProps {
 export default function BankAccountForm({
   onCloseModal,
 }: BankAccountFormProps) {
+  const [isPending, startTransition] = useTransition();
+
   const {
     register,
     reset,
@@ -36,20 +39,22 @@ export default function BankAccountForm({
   });
 
   const onSubmit = async (data: BankAccountFormData) => {
-    const newAccount = await createBankAccount(data);
+    startTransition(async () => {
+      const newAccount = await createBankAccount(data);
 
-    if (!!newAccount.id) {
-      onCloseModal();
-      reset();
-    }
+      if (!!newAccount.id) {
+        onCloseModal();
+        reset();
+      }
+    });
   };
 
   return (
     <form
+      onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
       method="dialog"
-      className="flex flex-col gap-2 modal-box h-[500px]"
-      onSubmit={handleSubmit(onSubmit)}>
+      className="flex flex-col gap-2 modal-box h-[500px]">
       <h3 className="font-bold text-lg">New bank account</h3>
       <div>
         <label className="label">
@@ -61,6 +66,7 @@ export default function BankAccountForm({
           className={cs('input input-bordered input-md w-full', {
             ['input-error']: !!errors.name,
           })}
+          disabled={isPending}
           maxLength={100}
           {...register('name')}
         />
@@ -79,6 +85,7 @@ export default function BankAccountForm({
                 selected={value}
                 onChange={onChange}
                 dateFormat="dd-MM-yyyy"
+                disabled={isPending}
               />
             )}
           />
@@ -95,6 +102,7 @@ export default function BankAccountForm({
                 ['input-error']: !!errors.balance,
               })}
               step="0.01"
+              disabled={isPending}
               {...register('balance')}
             />
             <p
@@ -119,10 +127,16 @@ export default function BankAccountForm({
           })}
           placeholder="Bank account notes"
           maxLength={500}
+          disabled={isPending}
           {...register('notes')}
         />
       </div>
-      <button className="btn btn-sm md:self-end">Save</button>
+      <button
+        className={cs('btn btn-sm md:self-end', {
+          ['btn-disabled']: isPending,
+        })}>
+        Save
+      </button>
     </form>
   );
 }

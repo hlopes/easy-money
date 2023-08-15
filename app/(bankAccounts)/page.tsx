@@ -1,4 +1,4 @@
-import { getBankAccounts } from './server-actions/bankAccounts';
+import { getBankAccounts } from './actions/bankAccounts';
 import { BankAccountsAddButton, BankAccountsTable } from './components';
 
 export default async function Home() {
