@@ -25,13 +25,14 @@ enum TransactionType {
 }
 
 model Transaction {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   date      DateTime
-  value     Float    @default(0)
-  notes     String?  @db.VarChar(500)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  value     Float           @default(0)
+  type      TransactionType
+  notes     String?         @db.VarChar(500)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @default(now())
 
   bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
-  bankAccountId String @db.Uuid
+  bankAccountId String      @db.Uuid
 }
