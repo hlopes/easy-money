@@ -1,21 +1,22 @@
 'use client';
 
-import Image from 'next/image';
+import { useTransition } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
+import Image from 'next/image';
+import * as yup from 'yup';
 import cs from 'classnames';
+import { BankAccount } from '@prisma/client';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { createBankAccount } from '../../actions/bankAccounts';
-
 import schema from './schema';
-import { useTransition } from 'react';
 
 type BankAccountFormData = yup.InferType<typeof schema>;
 
 interface BankAccountFormProps {
   onCloseModal(): void;
+  bankAccount?: BankAccount;
 }
 
 export default function BankAccountForm({

@@ -1,3 +1,28 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position": "before"
+          }
+        ],
+        "groups": [
+          "builtin", // React
+          "external", // External libraries
+          "internal", // Internal modules
+          [
+            "parent",
+            "sibling",
+            "index"
+          ] // Remaining modules (Next.js)
+        ],
+        "newlines-between": "always"
+      }
+    ]
+  }
 }

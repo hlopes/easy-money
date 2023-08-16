@@ -1,8 +1,9 @@
 'use server';
 
-import { apiBaseUrl } from '@/config/vars';
-import { BankAccount, Prisma } from '@prisma/client';
 import { revalidateTag } from 'next/cache';
+import { BankAccount, Prisma } from '@prisma/client';
+
+import { apiBaseUrl } from '@/config/vars';
 
 export async function getBankAccounts(): Promise<BankAccount[]> {
   const result = await fetch(`${apiBaseUrl}/bank-accounts`, {
