@@ -1,6 +1,6 @@
 'use client';
 
-import { BankAccount } from '@prisma/client';
+import type { BankAccount } from '@prisma/client';
 import cs from 'classnames';
 import { useState, useTransition } from 'react';
 import { LuEdit3, LuEraser } from 'react-icons/lu';
@@ -41,6 +41,7 @@ export default function BankAccountsTableActions({
 
           if (foundAccount) {
             setBankAccountToEdit(foundAccount);
+
             setIsFormModalOpen(true);
           }
         }}

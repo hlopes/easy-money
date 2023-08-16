@@ -1,4 +1,4 @@
-import { BankAccount } from '@prisma/client';
+import type { BankAccount } from '@prisma/client';
 import cs from 'classnames';
 
 import BankAccountsTableActions from './BankAccountsTableActions';

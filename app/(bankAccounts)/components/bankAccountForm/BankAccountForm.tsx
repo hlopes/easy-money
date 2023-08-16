@@ -1,13 +1,13 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { BankAccount } from '@prisma/client';
+import type { BankAccount } from '@prisma/client';
 import cs from 'classnames';
 import Image from 'next/image';
 import { useEffect, useRef, useTransition } from 'react';
 import DatePicker from 'react-datepicker';
 import { useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
+import type * as yup from 'yup';
 
 import schema from './schema';
 import {

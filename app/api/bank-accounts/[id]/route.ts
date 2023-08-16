@@ -1,22 +1,18 @@
-import { Prisma } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import type { Prisma } from '@prisma/client';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { deleteBankAccount, updateBankAccount } from '../_repository';
 
-export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } }
-) {
+async function DELETE(_: Request, { params }: { params: { id: string } }) {
   const bankAccount = await deleteBankAccount(params.id);
 
   return NextResponse.json(bankAccount);
 }
 
-export async function PUT(request: NextRequest) {
+async function PUT(request: NextRequest) {
   const data: Prisma.BankAccountUpdateInput & { id: string } =
     await request.json();
-
-  console.log('### data', data);
 
   if (data.id) {
     const newBankAccount = await updateBankAccount(data.id, { ...data });
@@ -28,3 +24,5 @@ export async function PUT(request: NextRequest) {
     status: 404,
   });
 }
+
+export { DELETE, PUT };

@@ -1,5 +1,24 @@
 {
   "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react",
+    "jsx-a11y",
+    "react-hooks"
+  ],
+  "ignorePatterns": [
+    "!.*",
+    "build",
+    "coverage",
+    "node_modules",
+    "public",
+    "storybook-static"
+  ],
   "rules": {
     "import/order": [
       "error",
@@ -26,6 +45,68 @@
           "order": "asc", // 'asc' for ascending order, 'desc' for descending
           "caseInsensitive": true
         }
+      }
+    ],
+    "import/group-exports": "error",
+    "import/no-anonymous-default-export": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "no-console": "error",
+    "no-var": "error",
+    "no-unused-vars": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreComments": true
+      }
+    ],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": "import",
+        "next": "import"
+      },
+      {
+        "blankLine": "any",
+        "prev": "export",
+        "next": "export"
+      },
+      {
+        "blankLine": "never",
+        "prev": "case",
+        "next": "case"
+      },
+      {
+        "blankLine": "never",
+        "prev": "case",
+        "next": "default"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-exports": [
+      "error",
+      {
+        "fixMixedExportsWithInlineTypeSpecifier": false
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "caughtErrors": "none",
+        "ignoreRestSiblings": true
       }
     ]
   }

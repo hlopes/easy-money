@@ -1,8 +1,8 @@
-import { BankAccount, Prisma } from '@prisma/client';
+import type { BankAccount, Prisma } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
 
-export async function findBankAccountById(id: string) {
+async function findBankAccountById(id: string) {
   return await prisma.bankAccount.findUnique({
     where: {
       id,
@@ -10,7 +10,7 @@ export async function findBankAccountById(id: string) {
   });
 }
 
-export async function findBankAccount(criteria?: Partial<BankAccount>) {
+async function findBankAccount(criteria?: Partial<BankAccount>) {
   return await prisma.bankAccount.findMany({
     where: {
       ...(criteria ?? {}),
@@ -18,9 +18,7 @@ export async function findBankAccount(criteria?: Partial<BankAccount>) {
   });
 }
 
-export async function createBankAccount(
-  bankAccount: Prisma.BankAccountCreateInput
-) {
+async function createBankAccount(bankAccount: Prisma.BankAccountCreateInput) {
   try {
     const newBankAccount = await prisma.bankAccount.create({
       data: {
@@ -30,13 +28,11 @@ export async function createBankAccount(
 
     return newBankAccount;
   } catch (error) {
-    console.error('Error updating bank account:', error);
-
     throw error;
   }
 }
 
-export async function updateBankAccount(
+async function updateBankAccount(
   id: string,
   updateWith: Prisma.BankAccountUpdateInput
 ) {
@@ -48,14 +44,20 @@ export async function updateBankAccount(
 
     return updatedUser;
   } catch (error) {
-    console.error('Error updating bank account:', error);
-
     throw error;
   }
 }
 
-export async function deleteBankAccount(id: string) {
+async function deleteBankAccount(id: string) {
   return await prisma.bankAccount.delete({
     where: { id },
   });
 }
+
+export {
+  findBankAccountById,
+  findBankAccount,
+  createBankAccount,
+  updateBankAccount,
+  deleteBankAccount,
+};
