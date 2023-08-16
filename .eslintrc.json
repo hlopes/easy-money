@@ -21,7 +21,11 @@
             "index"
           ] // Remaining modules (Next.js)
         ],
-        "newlines-between": "always"
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc", // 'asc' for ascending order, 'desc' for descending
+          "caseInsensitive": true
+        }
       }
     ]
   }

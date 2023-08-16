@@ -1,5 +1,5 @@
-import cs from 'classnames';
 import { BankAccount } from '@prisma/client';
+import cs from 'classnames';
 
 import BankAccountsTableActions from './BankAccountsTableActions';
 import { formatDateToDisplay } from '../helpers/dates';
@@ -37,7 +37,10 @@ export default function BankAccountTable({
               <td className="hidden sm:block">{bankAccount.notes}</td>
               <td>{formatDateToDisplay(new Date(bankAccount.date))}</td>
               <td className="flex gap-2 justify-end">
-                <BankAccountsTableActions bankAccountId={bankAccount.id} />
+                <BankAccountsTableActions
+                  bankAccountId={bankAccount.id}
+                  bankAccounts={bankAccounts}
+                />
               </td>
             </tr>
           );

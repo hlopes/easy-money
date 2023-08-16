@@ -1,7 +1,7 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
 import { BankAccount, Prisma } from '@prisma/client';
+import { revalidateTag } from 'next/cache';
 
 import { apiBaseUrl } from '@/config/vars';
 
@@ -29,6 +29,19 @@ export async function createBankAccount(
 ): Promise<BankAccount> {
   const result = await fetch(`${apiBaseUrl}/bank-accounts`, {
     method: 'post',
+    body: JSON.stringify(bankAccount),
+  });
+
+  revalidateTag('bankAccounts');
+
+  return await result.json();
+}
+
+export async function updateBankAccount(
+  bankAccount: Prisma.BankAccountUpdateInput
+): Promise<BankAccount> {
+  const result = await fetch(`${apiBaseUrl}/bank-accounts/${bankAccount.id}`, {
+    method: 'put',
     body: JSON.stringify(bankAccount),
   });
 
