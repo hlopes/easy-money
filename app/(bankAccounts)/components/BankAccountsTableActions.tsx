@@ -1,12 +1,13 @@
 'use client';
 
-import type { BankAccount } from '@prisma/client';
-import cs from 'classnames';
 import { useState, useTransition } from 'react';
 import { LuEdit3, LuEraser } from 'react-icons/lu';
+import cs from 'classnames';
+import type { BankAccount } from '@prisma/client';
+
+import { deleteBankAccount } from '../actions/bankAccounts';
 
 import BankAccountForm from './bankAccountForm';
-import { deleteBankAccount } from '../actions/bankAccounts';
 
 interface BankAccountTableActionsProps {
   bankAccountId: string;

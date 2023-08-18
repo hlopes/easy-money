@@ -1,8 +1,9 @@
-import type { BankAccount } from '@prisma/client';
 import cs from 'classnames';
+import type { BankAccount } from '@prisma/client';
+
+import { formatDateToDisplay } from '@/helpers/dates';
 
 import BankAccountsTableActions from './BankAccountsTableActions';
-import { formatDateToDisplay } from '../../../helpers/dates';
 
 interface BankAccountTableProps {
   bankAccounts: BankAccount[];

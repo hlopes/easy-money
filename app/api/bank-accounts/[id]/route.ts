@@ -1,6 +1,6 @@
-import type { Prisma } from '@prisma/client';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import type { Prisma } from '@prisma/client';
 
 import { deleteBankAccount, updateBankAccount } from '../_repository';
 

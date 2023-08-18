@@ -9,7 +9,8 @@
     "import",
     "react",
     "jsx-a11y",
-    "react-hooks"
+    "react-hooks",
+    "simple-import-sort"
   ],
   "ignorePatterns": [
     "!.*",
@@ -20,33 +21,43 @@
     "storybook-static"
   ],
   "rules": {
-    "import/order": [
+    "simple-import-sort/imports": [
       "error",
       {
-        "pathGroups": [
-          {
-            "pattern": "@/**",
-            "group": "internal",
-            "position": "before"
-          }
-        ],
         "groups": [
-          "builtin", // React
-          "external", // External libraries
-          "internal", // Internal modules
+          // Node builtin modules:
           [
-            "parent",
-            "sibling",
-            "index"
-          ] // Remaining modules (Next.js)
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc", // 'asc' for ascending order, 'desc' for descending
-          "caseInsensitive": true
-        }
+            "^node:\\w"
+          ],
+          // Third party packages, with React and Next first:
+          [
+            "^react",
+            "^next",
+            "^\\w",
+            "^@?\\w"
+          ],
+          [
+            "^@/\\w"
+          ],
+          // Parent imports, with `..` first.
+          [
+            "^\\.\\./?$",
+            "^\\.\\.(?!/?$)"
+          ],
+          // Other relative imports with nested folders imports first and same folder imports last.
+          [
+            "^\\./(?=.*/)(?!/?$)",
+            "^\\.(?!/?$)",
+            "^\\./?$"
+          ],
+          // Side effect imports.
+          [
+            "^\\u0000"
+          ]
+        ]
       }
     ],
+    "simple-import-sort/exports": "error",
     "import/group-exports": "error",
     "import/no-anonymous-default-export": "error",
     "react-hooks/rules-of-hooks": "error",

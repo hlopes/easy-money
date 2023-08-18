@@ -55,9 +55,9 @@ async function deleteBankAccount(id: string) {
 }
 
 export {
-  findBankAccountById,
-  findBankAccount,
   createBankAccount,
-  updateBankAccount,
   deleteBankAccount,
+  findBankAccount,
+  findBankAccountById,
+  updateBankAccount,
 };

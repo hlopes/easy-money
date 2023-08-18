@@ -1,7 +1,7 @@
 'use server';
 
-import type { BankAccount, Prisma } from '@prisma/client';
 import { revalidateTag } from 'next/cache';
+import type { BankAccount, Prisma } from '@prisma/client';
 
 import { apiBaseUrl } from '@/config/vars';
 
@@ -51,8 +51,8 @@ async function deleteBankAccount(bankAccountId: string): Promise<void> {
 }
 
 export {
-  getBankAccounts,
   createBankAccount,
-  updateBankAccount,
   deleteBankAccount,
+  getBankAccounts,
+  updateBankAccount,
 };

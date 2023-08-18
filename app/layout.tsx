@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
 import 'react-datepicker/dist/react-datepicker.css';
-
 import './globals.css';
 
 export const metadata = {

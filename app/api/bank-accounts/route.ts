@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { findBankAccount, createBankAccount } from './_repository';
+import { createBankAccount, findBankAccount } from './_repository';
 
 async function GET() {
   const bankAccounts = await findBankAccount();
