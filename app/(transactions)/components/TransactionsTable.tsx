@@ -14,6 +14,7 @@ export default function TransactionsTable({
     <table className="table">
       <thead>
         <tr>
+          <th>Type</th>
           <th>Bank Account</th>
           <th>Value</th>
           <th>Date</th>
@@ -25,6 +26,7 @@ export default function TransactionsTable({
         {transactions.map((transaction) => {
           return (
             <tr key={transaction.id}>
+              <td>{transaction.type}</td>
               <td>{transaction.bankAccountId}</td>
               <td
                 className={cs('font-medium', {

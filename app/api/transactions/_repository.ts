@@ -23,7 +23,7 @@ async function createTransaction(
     bankAccountId: string;
   }
 ) {
-  const { date, value, notes } = transaction;
+  const { date, value, notes, type } = transaction;
 
   try {
     const newTransaction = await prisma.transaction.create({
@@ -31,6 +31,7 @@ async function createTransaction(
         date,
         value,
         notes,
+        type,
         bankAccount: {
           connect: { id: transaction.bankAccountId },
         },

@@ -19,16 +19,11 @@ model BankAccount {
   transaction Transaction[]
 }
 
-enum TransactionType {
-  INCOME
-  EXPENSE
-}
-
 model Transaction {
   id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   date      DateTime
   value     Float           @default(0)
-  type      TransactionType
+  type      String
   notes     String?         @db.VarChar(500)
   createdAt DateTime        @default(now())
   updatedAt DateTime        @default(now())
