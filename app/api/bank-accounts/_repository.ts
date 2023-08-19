@@ -37,12 +37,12 @@ async function updateBankAccount(
   updateWith: Prisma.BankAccountUpdateInput
 ) {
   try {
-    const updatedUser = await prisma.bankAccount.update({
+    const updatedBankAccount = await prisma.bankAccount.update({
       where: { id },
       data: { ...updateWith },
     });
 
-    return updatedUser;
+    return updatedBankAccount;
   } catch (error) {
     throw error;
   }

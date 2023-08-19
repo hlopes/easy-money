@@ -106,7 +106,9 @@ export default function BankAccountForm({
         autoComplete="off"
         method="dialog"
         className="flex flex-col gap-2 modal-box h-[500px]">
-        <h3 className="font-bold text-lg">New bank account</h3>
+        <h3 className="font-bold text-lg">
+          {bankAccount ? 'Update bank account' : 'New bank account'}
+        </h3>
         <div>
           <label className="label">
             <span className="label-text">Name</span>
@@ -182,7 +184,7 @@ export default function BankAccountForm({
             className={cs(
               'textarea w-full textarea-bordered placeholder:text-neutral',
               {
-                ['input-error']: !!errors.name,
+                ['input-error']: !!errors.notes,
               }
             )}
             placeholder="Bank account notes"
