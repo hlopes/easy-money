@@ -10,10 +10,16 @@ async function findTransactionById(id: string) {
   });
 }
 
-async function findTransactions(criteria?: Partial<Transaction>) {
+async function findTransactions(criteria?: Transaction) {
   return await prisma.transaction.findMany({
     where: {
       ...(criteria ?? {}),
+    },
+    include: {
+      bankAccount: true,
+    },
+    orderBy: {
+      date: 'desc',
     },
   });
 }

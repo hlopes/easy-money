@@ -3,12 +3,12 @@
 import { revalidateTag } from 'next/cache';
 import type { Prisma, Transaction } from '@prisma/client';
 
+import type { findTransactions } from '@/app/api/transactions/_repository';
 import { apiBaseUrl } from '@/config/vars';
 
-async function getTransactions(): Promise<Transaction[]> {
+async function getTransactions(): Promise<ReturnType<typeof findTransactions>> {
   const result = await fetch(`${apiBaseUrl}/transactions`, {
-    cache: 'no-cache',
-    next: { tags: ['transactions'] },
+    next: { tags: ['transactions'], revalidate: 0 },
   });
 
   return await result.json();

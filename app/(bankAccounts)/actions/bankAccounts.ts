@@ -7,8 +7,7 @@ import { apiBaseUrl } from '@/config/vars';
 
 async function getBankAccounts(): Promise<BankAccount[]> {
   const result = await fetch(`${apiBaseUrl}/bank-accounts`, {
-    cache: 'no-cache',
-    next: { tags: ['bankAccounts'] },
+    next: { tags: ['bankAccounts'], revalidate: 0 },
   });
 
   return await result.json();

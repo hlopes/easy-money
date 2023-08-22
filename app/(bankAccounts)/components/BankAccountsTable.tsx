@@ -1,17 +1,14 @@
 import cs from 'classnames';
-import type { BankAccount } from '@prisma/client';
 
 import { formatDateToDisplay } from '@/helpers/dates';
 
+import { getBankAccounts } from '../actions/bankAccounts';
+
 import BankAccountsTableActions from './BankAccountsTableActions';
 
-interface BankAccountTableProps {
-  bankAccounts: BankAccount[];
-}
+export default async function BankAccountTable() {
+  const bankAccounts = await getBankAccounts();
 
-export default function BankAccountTable({
-  bankAccounts,
-}: BankAccountTableProps) {
   return (
     <table className="table">
       <thead>
