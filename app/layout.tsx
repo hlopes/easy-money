@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { Roboto_Mono } from 'next/font/google';
 
-import Sidebar from './_components/Sidebar';
+import SideBar from './_components/SideBar';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './globals.css';
@@ -17,9 +17,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={robotoMono.className}>
-        <Sidebar>
-          <div className="container mx-auto">{children}</div>
-        </Sidebar>
+        <SideBar>
+          <div className="container mx-auto px-4">{children}</div>
+        </SideBar>
       </body>
     </html>
   );
