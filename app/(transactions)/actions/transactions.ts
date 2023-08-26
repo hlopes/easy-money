@@ -1,12 +1,22 @@
 'use server';
 
 import { revalidateTag } from 'next/cache';
+import { mutate } from 'swr';
 import type { Prisma, Transaction } from '@prisma/client';
 
-import type { findTransactions } from '@/app/api/transactions/_repository';
 import { apiBaseUrl } from '@/config/vars';
 
-async function getTransactions(): Promise<ReturnType<typeof findTransactions>> {
+import type { TransactionWithBankAccount } from '../types';
+
+async function getFilteredTransactions(
+  url: string
+): Promise<TransactionWithBankAccount[]> {
+  const result = await fetch(`${apiBaseUrl}${url}`);
+
+  return await result.json();
+}
+
+async function getTransactions(): Promise<TransactionWithBankAccount[]> {
   const result = await fetch(`${apiBaseUrl}/transactions`, {
     next: { tags: ['transactions'], revalidate: 0 },
   });
@@ -23,6 +33,8 @@ async function createTransaction(
     method: 'post',
     body: JSON.stringify(transaction),
   });
+
+  mutate('/transactions');
 
   revalidateTag('transactions');
 
@@ -55,6 +67,7 @@ async function deleteTransaction(transactionId: string): Promise<void> {
 export {
   createTransaction,
   deleteTransaction,
+  getFilteredTransactions,
   getTransactions,
   updateTransaction,
 };

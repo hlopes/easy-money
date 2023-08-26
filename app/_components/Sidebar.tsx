@@ -15,7 +15,7 @@ export default function SideBar({ children }: PropsWithChildren) {
       <div className="drawer-side">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
         <nav className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-          <h3 className="mb-10">Menu</h3>
+          <h3 className="prose mb-8">Menu</h3>
           <ul>
             <li>
               <Link href="/">Dashboard</Link>

@@ -5,8 +5,18 @@ import type { BankAccount, Prisma } from '@prisma/client';
 
 import { apiBaseUrl } from '@/config/vars';
 
-async function getBankAccounts(): Promise<BankAccount[]> {
-  const result = await fetch(`${apiBaseUrl}/bank-accounts`, {
+interface BankAccountFilter {
+  type: string;
+}
+
+async function getBankAccounts(
+  filters?: BankAccountFilter
+): Promise<BankAccount[]> {
+  const url = filters
+    ? `${apiBaseUrl}/bank-accounts?type=${filters.type}`
+    : `${apiBaseUrl}/bank-accounts`;
+
+  const result = await fetch(url, {
     next: { tags: ['bankAccounts'], revalidate: 0 },
   });
 

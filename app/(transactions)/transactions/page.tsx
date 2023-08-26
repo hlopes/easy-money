@@ -7,10 +7,10 @@ export default async function Transactions() {
 
   return (
     <main>
-      <article className="prose my-2">
+      <section className="prose my-2 flex justify-between">
         <h2>Transactions</h2>
-      </article>
-      <TransactionsAddButton bankAccounts={bankAccounts} />
+        <TransactionsAddButton bankAccounts={bankAccounts} />
+      </section>
       <TransactionsTable bankAccounts={bankAccounts} />
     </main>
   );
