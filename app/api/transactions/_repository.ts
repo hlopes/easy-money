@@ -2,6 +2,26 @@ import type { Prisma, Transaction } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
 
+async function updateBankAccountBalance(
+  transaction: Transaction,
+  amount: number
+) {
+  const bankAccount = await prisma.bankAccount.findUnique({
+    where: {
+      id: transaction?.bankAccountId,
+    },
+  });
+
+  if (!bankAccount) {
+    throw new Error('Could not find bank account');
+  }
+
+  await prisma.bankAccount.update({
+    where: { id: transaction?.bankAccountId },
+    data: { balance: bankAccount.balance + amount },
+  });
+}
+
 async function findTransactionById(id: string) {
   return await prisma.transaction.findUnique({
     where: {
@@ -47,6 +67,13 @@ async function createTransaction(
       },
     });
 
+    const amountToAdd =
+      transaction?.type === 'income'
+        ? +(transaction?.value ?? 0)
+        : -(transaction?.value ?? 0);
+
+    await updateBankAccountBalance(newTransaction, amountToAdd);
+
     return newTransaction;
   } catch (error) {
     throw error;
@@ -58,6 +85,30 @@ async function updateTransaction(
   updateWith: Prisma.TransactionUpdateInput
 ) {
   try {
+    const transaction = await prisma.transaction.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!transaction) {
+      throw new Error('Could not find transaction');
+    }
+
+    const amountToRemove =
+      transaction?.type === 'income'
+        ? -transaction?.value
+        : +(transaction?.value ?? 0);
+
+    await updateBankAccountBalance(transaction, amountToRemove);
+
+    const amountToAdd =
+      updateWith?.type === 'income'
+        ? +(updateWith?.value ?? 0)
+        : -(updateWith?.value ?? 0);
+
+    await updateBankAccountBalance(transaction, amountToAdd);
+
     const updatedTransaction = await prisma.transaction.update({
       where: { id },
       data: { ...updateWith },
@@ -70,9 +121,30 @@ async function updateTransaction(
 }
 
 async function deleteTransaction(id: string) {
-  return await prisma.transaction.delete({
-    where: { id },
-  });
+  try {
+    const transaction = await prisma.transaction.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!transaction) {
+      throw new Error('Could not find transaction');
+    }
+
+    const newAmount =
+      transaction?.type === 'income'
+        ? -transaction?.value
+        : +(transaction?.value ?? 0);
+
+    await updateBankAccountBalance(transaction, newAmount);
+
+    return await prisma.transaction.delete({
+      where: { id },
+    });
+  } catch (error) {
+    throw error;
+  }
 }
 
 export {
