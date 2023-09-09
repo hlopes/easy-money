@@ -18,6 +18,7 @@ export default function useTransactions({
     data: transactions,
     isFetching: isFetchingTransactions,
   } = trpc.getTransactions.useQuery(undefined, {
+    queryKey: ['getTransactions', undefined],
     initialData: initialTransactions,
     refetchOnMount: false,
     refetchOnReconnect: false,
@@ -51,7 +52,7 @@ export default function useTransactions({
     });
 
   return {
-    transactions: transactions.length ? transactions : initialTransactions,
+    transactions,
     isFetchingTransactions,
     isLoadingCreateTransaction,
     isLoadingUpdateTransaction,

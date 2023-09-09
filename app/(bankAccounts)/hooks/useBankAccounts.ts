@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import trpc from '@/lib/trpc/client';
 import type serverClient from '@/lib/trpc/serverClient';
 
@@ -8,6 +10,8 @@ interface UseBankAccountsArgs {
 }
 
 export default function useBankAccounts(args?: UseBankAccountsArgs) {
+  const queryClient = useQueryClient();
+
   const initialBankAccounts = args?.initialBankAccounts ?? [];
 
   const {
@@ -42,7 +46,7 @@ export default function useBankAccounts(args?: UseBankAccountsArgs) {
     });
 
   return {
-    bankAccounts: bankAccounts.length ? bankAccounts : initialBankAccounts,
+    bankAccounts,
     isFetchingGetBankAccounts,
     isLoadingCreateBankAccount,
     isLoadingUpdateBankAccount,
