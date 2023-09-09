@@ -1,12 +1,13 @@
 import type { PropsWithChildren } from 'react';
 import { Roboto_Mono } from 'next/font/google';
 
-import SideBar from './_components/SideBar';
+import SideNav from '@/components/SideNav';
 
-import 'react-datepicker/dist/react-datepicker.css';
+import TRPCProvider from '../components/providers/TRPCProvider';
+
 import './globals.css';
 
-const robotoMono = Roboto_Mono({ subsets: ['latin'] });
+const font = Roboto_Mono({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Easy Money',
@@ -16,10 +17,12 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={robotoMono.className}>
-        <SideBar>
-          <div className="container mx-auto px-4">{children}</div>
-        </SideBar>
+      <body className={font.className}>
+        <TRPCProvider>
+          <SideNav>
+            <main className="container px-4 max-w-4xl">{children}</main>
+          </SideNav>
+        </TRPCProvider>
       </body>
     </html>
   );

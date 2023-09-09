@@ -8,26 +8,33 @@ datasource db {
 }
 
 model BankAccount {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String   @db.VarChar(100)
+  id        String   @id @default(uuid())
+  name      String   @db.Text
   date      DateTime
   balance   Float    @default(0)
-  notes     String?  @db.VarChar(500)
+  notes     String?  @db.Text
+
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   transaction Transaction[]
 }
 
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
 model Transaction {
-  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String          @id @default(uuid())
   date      DateTime
   value     Float           @default(0)
-  type      String
+  type      TransactionType @default(INCOME)
   notes     String?         @db.VarChar(500)
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @default(now())
 
-  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
-  bankAccountId String      @db.Uuid
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  bankAccountId String
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
 }
