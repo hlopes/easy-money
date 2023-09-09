@@ -2,13 +2,11 @@
 
 import type { PropsWithChildren } from 'react';
 import { useState } from 'react';
-import { LuMenu } from 'react-icons/lu';
 import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
-import { Button } from './ui/button';
-import UserNav from './UserNav';
+import TopNav from './TopNav';
 
 export default function SideNav({ children }: PropsWithChildren) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +16,7 @@ export default function SideNav({ children }: PropsWithChildren) {
       {/* Navigation */}
       <div
         className={cn(
-          'fixed inset-y-0 left-0 w-64 h-screen bg-white shadow-md transform transition-transform duration-300 ease-in-out z-10 lg:static',
+          'fixed inset-y-0 left-0 w-full h-screen bg-white dark:bg-background shadow-md transform transition-transform duration-300 ease-in-out z-10 lg:static border-r-2 mt-[65px] lg:mt-0 md:w-64',
           !isOpen && '-translate-x-full lg:-translate-x-0'
         )}>
         <div className="p-4 prose">
@@ -43,25 +41,15 @@ export default function SideNav({ children }: PropsWithChildren) {
       <div
         id="backdrop"
         className={cn(
-          'fixed inset-0 bg-black opacity-25 lg:hidden',
+          'fixed inset-0 bg-black opacity-25 mt-[65px] lg:hidden lg:mt-0',
           !isOpen && 'hidden'
         )}
         onClick={() => setIsOpen(false)}></div>
 
       {/* TopBar */}
       <div className="flex flex-col w-full">
-        <div className="border-b">
-          <div className="flex h-16 items-center justify-between px-4">
-            <Button
-              className="lg:hidden"
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(true)}>
-              <LuMenu className="w-6 h-6" />
-            </Button>
-            <UserNav />
-          </div>
-        </div>
+        <TopNav onOpen={() => setIsOpen(true)} />
+        {/* Page */}
         {children}
       </div>
     </div>

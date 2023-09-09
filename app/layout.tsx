@@ -1,9 +1,9 @@
 import type { PropsWithChildren } from 'react';
 import { Roboto_Mono } from 'next/font/google';
 
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import TRPCProvider from '@/components/providers/TRPCProvider';
 import SideNav from '@/components/SideNav';
-
-import TRPCProvider from '../components/providers/TRPCProvider';
 
 import './globals.css';
 
@@ -19,9 +19,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body className={font.className}>
         <TRPCProvider>
-          <SideNav>
-            <main className="container px-4 max-w-4xl">{children}</main>
-          </SideNav>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <SideNav>
+              <main className="container px-4 max-w-4xl">{children}</main>
+            </SideNav>
+          </ThemeProvider>
         </TRPCProvider>
       </body>
     </html>
