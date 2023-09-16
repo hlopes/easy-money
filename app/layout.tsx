@@ -26,7 +26,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           <ThemeProvider attribute="class" defaultTheme="system">
             <SessionProvider session={session}>
               <SideNav>
-                <main className="container px-4 max-w-4xl">{children}</main>
+                <main className="container mt-2 px-4 max-w-4xl">
+                  {children}
+                </main>
               </SideNav>
             </SessionProvider>
           </ThemeProvider>
