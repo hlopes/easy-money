@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import { Roboto_Mono } from 'next/font/google';
+import { getServerSession } from 'next-auth';
 
+import SessionProvider from '@/components/providers/SessionProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import TRPCProvider from '@/components/providers/TRPCProvider';
 import SideNav from '@/components/SideNav';
@@ -14,15 +16,19 @@ export const metadata = {
   description: 'Money Tracker',
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
       <body className={font.className}>
         <TRPCProvider>
           <ThemeProvider attribute="class" defaultTheme="system">
-            <SideNav>
-              <main className="container px-4 max-w-4xl">{children}</main>
-            </SideNav>
+            <SessionProvider session={session}>
+              <SideNav>
+                <main className="container px-4 max-w-4xl">{children}</main>
+              </SideNav>
+            </SessionProvider>
           </ThemeProvider>
         </TRPCProvider>
       </body>

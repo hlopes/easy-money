@@ -1,4 +1,3 @@
-import React from 'react';
 import { LuMenu } from 'react-icons/lu';
 
 import { Button } from './ui/button';
