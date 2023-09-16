@@ -37,8 +37,6 @@ export default function TransactionsManager({
     deleteTransaction,
   } = useTransactions({ initialTransactions });
 
-  console.log('### categories', categories);
-
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
   const [selectedTransactionIdForEdit, setSelectedTransactionIdForEdit] =
@@ -90,7 +88,7 @@ export default function TransactionsManager({
         }}
         transaction={selectedTransactionForEdit}
         bankAccounts={bankAccounts}
-        categories={categories}
+        categories={categories ?? []}
         onCreate={createTransaction}
         onUpdate={updateTransaction}
       />
