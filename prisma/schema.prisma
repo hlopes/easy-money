@@ -8,11 +8,11 @@ datasource db {
 }
 
 model BankAccount {
-  id        String   @id @default(uuid())
-  name      String   @db.Text
-  date      DateTime
-  balance   Float    @default(0)
-  notes     String?  @db.Text
+  id      String   @id @default(uuid())
+  name    String   @db.Text
+  date    DateTime
+  balance Float    @default(0)
+  notes   String?  @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -26,15 +26,40 @@ enum TransactionType {
 }
 
 model Transaction {
-  id        String          @id @default(uuid())
-  date      DateTime
-  value     Float           @default(0)
-  type      TransactionType @default(INCOME)
-  notes     String?         @db.VarChar(500)
+  id    String          @id @default(uuid())
+  date  DateTime
+  value Float           @default(0)
+  type  TransactionType @default(INCOME)
+  notes String?         @db.VarChar(500)
 
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   bankAccountId String
   bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
+
+  categories CategoriesOnTransactions[]
+}
+
+model Category {
+  id   String  @id @default(uuid())
+  name String? @db.VarChar(500)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions CategoriesOnTransactions[]
+}
+
+model CategoriesOnTransactions {
+  transactionId String
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  categoryId String // relation scalar field (used in the `@relation` attribute above)
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  assignedBy String
+  assignedAt DateTime @default(now())
+
+  @@id([transactionId, categoryId])
 }
