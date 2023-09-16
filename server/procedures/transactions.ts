@@ -29,6 +29,9 @@ const transactionsProcedures = {
   getTransactions: publicProcedure.query(async () => {
     return await prisma.transaction.findMany();
   }),
+  getCategories: publicProcedure.query(async () => {
+    return await prisma.category.findMany();
+  }),
   createTransaction: publicProcedure
     .input(
       zod.object({
@@ -39,17 +42,30 @@ const transactionsProcedures = {
         value: zod.number(),
         notes: zod.string().optional(),
         bankAccountId: zod.string(),
+        category: zod.string(),
       })
     )
     .mutation(async (opts) => {
       try {
-        const { bankAccountId, ...inputs } = opts.input;
+        const { bankAccountId, category, ...inputs } = opts.input;
 
         const newTransaction = await prisma.transaction.create({
           data: {
             ...inputs,
             bankAccount: {
               connect: { id: bankAccountId },
+            },
+            categories: {
+              create: [
+                {
+                  assignedAt: new Date(),
+                  category: {
+                    create: {
+                      name: category,
+                    },
+                  },
+                },
+              ],
             },
           },
           include: {

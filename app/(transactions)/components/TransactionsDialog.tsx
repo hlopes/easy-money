@@ -1,6 +1,6 @@
 'use client';
 
-import type { BankAccount, Transaction } from '@prisma/client';
+import type { BankAccount, Category, Transaction } from '@prisma/client';
 
 import {
   Dialog,
@@ -16,6 +16,7 @@ import TransactionForm from './transaction-form/TransactionForm';
 interface TransactionDialogProps {
   isLoading: boolean;
   bankAccounts: BankAccount[];
+  categories: Category[];
   transaction?: Transaction;
   open: boolean;
   onClose(): void;
@@ -26,6 +27,7 @@ interface TransactionDialogProps {
 export default function TransactionDialog({
   isLoading,
   bankAccounts,
+  categories,
   transaction,
   open,
   onClose,
@@ -46,6 +48,7 @@ export default function TransactionDialog({
           onClose={onClose}
           transaction={transaction}
           bankAccounts={bankAccounts}
+          categories={categories}
           onCreate={onCreate}
           onUpdate={onUpdate}
         />

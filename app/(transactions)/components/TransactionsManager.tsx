@@ -27,6 +27,8 @@ export default function TransactionsManager({
 }: TransactionsManagerProps) {
   const {
     transactions,
+    categories,
+    isFetchingCategories,
     isLoadingCreateTransaction,
     isLoadingUpdateTransaction,
     isLoadingDeleteTransaction,
@@ -34,6 +36,8 @@ export default function TransactionsManager({
     updateTransaction,
     deleteTransaction,
   } = useTransactions({ initialTransactions });
+
+  console.log('### categories', categories);
 
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
@@ -73,7 +77,11 @@ export default function TransactionsManager({
         />
       </div>
       <TransactionDialog
-        isLoading={isLoadingCreateTransaction || isLoadingUpdateTransaction}
+        isLoading={
+          isFetchingCategories ||
+          isLoadingCreateTransaction ||
+          isLoadingUpdateTransaction
+        }
         open={isFormModalOpen || !!selectedTransactionIdForEdit}
         onClose={() => {
           setIsFormModalOpen(false);
@@ -82,6 +90,7 @@ export default function TransactionsManager({
         }}
         transaction={selectedTransactionForEdit}
         bankAccounts={bankAccounts}
+        categories={categories}
         onCreate={createTransaction}
         onUpdate={updateTransaction}
       />

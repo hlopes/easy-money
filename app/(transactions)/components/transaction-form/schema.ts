@@ -7,6 +7,7 @@ const schema = zod.object({
   notes: zod.string().optional(),
   value: zod.coerce.number(),
   type: zod.union([zod.literal('INCOME'), zod.literal('EXPENSE')]).optional(),
+  category: zod.string().optional(),
 });
 
 type TransactionFormData = zod.infer<typeof schema>;

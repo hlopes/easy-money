@@ -18,42 +18,58 @@ export default function useTransactions({
     data: transactions,
     isFetching: isFetchingTransactions,
   } = trpc.getTransactions.useQuery(undefined, {
-    queryKey: ['getTransactions', undefined],
     initialData: initialTransactions,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
+
+  const {
+    refetch: refetchCategories,
+    data: categories,
+    isFetching: isFetchingCategories,
+  } = trpc.getCategories.useQuery(undefined, {
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
 
   const { mutate: createTransaction, isLoading: isLoadingCreateTransaction } =
     trpc.createTransaction.useMutation({
-      onSettled: () => {
+      onSuccess: () => {
         refetchTransactions();
 
         refetchBankAccounts();
+
+        refetchCategories();
       },
     });
 
   const { mutate: updateTransaction, isLoading: isLoadingUpdateTransaction } =
     trpc.updateTransaction.useMutation({
-      onSettled: () => {
+      onSuccess: () => {
         refetchTransactions();
 
         refetchBankAccounts();
+
+        refetchCategories();
       },
     });
 
   const { mutate: deleteTransaction, isLoading: isLoadingDeleteTransaction } =
     trpc.deleteTransaction.useMutation({
-      onSettled: () => {
+      onSuccess: () => {
         refetchTransactions();
 
         refetchBankAccounts();
+
+        refetchCategories();
       },
     });
 
   return {
     transactions,
+    categories,
     isFetchingTransactions,
+    isFetchingCategories,
     isLoadingCreateTransaction,
     isLoadingUpdateTransaction,
     isLoadingDeleteTransaction,
@@ -61,5 +77,6 @@ export default function useTransactions({
     createTransaction,
     updateTransaction,
     deleteTransaction,
+    refetchCategories,
   };
 }

@@ -42,8 +42,8 @@ model Transaction {
 }
 
 model Category {
-  id   String  @id @default(uuid())
-  name String? @db.VarChar(500)
+  id   String @id @default(uuid())
+  name String @db.VarChar(500)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -58,7 +58,6 @@ model CategoriesOnTransactions {
   categoryId String // relation scalar field (used in the `@relation` attribute above)
   category   Category @relation(fields: [categoryId], references: [id])
 
-  assignedBy String
   assignedAt DateTime @default(now())
 
   @@id([transactionId, categoryId])
