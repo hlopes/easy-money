@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth';
 
 import SessionProvider from '@/components/providers/SessionProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
-// import TRPCProvider from '@/components/providers/TRPCProvider';
 import SideNav from '@/components/SideNav';
 import { Toaster } from '@/components/ui/toaster';
 

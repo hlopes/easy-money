@@ -1,14 +1,14 @@
 'use client';
 
 import { useMemo } from 'react';
+import type { Transaction } from '@prisma/client';
 
 import { DataTable } from '@/components/ui/data-table';
-import type serverClient from '@/lib/trpc/serverClient';
 
 import getColumns from './columns';
 
 interface TransactionsTableProps {
-  transactions: Awaited<ReturnType<(typeof serverClient)['getTransactions']>>;
+  transactions: Transaction[];
   onEdit(arg: string): void;
   onDelete(arg: string): void;
 }
