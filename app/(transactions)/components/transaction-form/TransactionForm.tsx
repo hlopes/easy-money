@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,7 +13,6 @@ import {
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { CalendarIcon } from '@radix-ui/react-icons';
 
-import getCategories from '@/app/(transactions)/actions/getCategories';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
