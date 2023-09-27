@@ -16,25 +16,34 @@ export default async function createTransaction(
   try {
     const { bankAccountId, ...inputs } = data;
 
-    const newTransaction = await prisma.transaction.create({
-      data: {
-        ...inputs,
-        bankAccount: {
-          connect: { id: bankAccountId },
-        },
-        categories: {
-          create: [
-            {
-              assignedAt: new Date(),
-              category: {
-                create: {
-                  name: category,
+    const inputData = category
+      ? {
+          ...inputs,
+          bankAccount: {
+            connect: { id: bankAccountId },
+          },
+          categories: {
+            create: [
+              {
+                assignedAt: new Date(),
+                category: {
+                  create: {
+                    name: category ?? '',
+                  },
                 },
               },
-            },
-          ],
-        },
-      },
+            ],
+          },
+        }
+      : {
+          ...inputs,
+          bankAccount: {
+            connect: { id: bankAccountId },
+          },
+        };
+
+    const newTransaction = await prisma.transaction.create({
+      data: inputData,
       include: {
         bankAccount: true,
       },
