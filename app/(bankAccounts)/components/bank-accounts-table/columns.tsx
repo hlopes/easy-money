@@ -16,15 +16,12 @@ const getColumns = ({
   {
     accessorKey: 'name',
     header: 'Name',
-    cell: ({ row }) => {
-      const name: string = row.getValue('name');
-
-      return <p className="font-semibold">{name}</p>;
-    },
+    maxSize: 100,
   },
   {
     accessorKey: 'date',
     header: 'Date',
+    maxSize: 100,
     cell: ({ row }) => {
       return formatDateToDisplay(new Date(row.getValue('date')));
     },
@@ -32,6 +29,7 @@ const getColumns = ({
   {
     accessorKey: 'balance',
     header: 'Balance',
+    maxSize: 100,
     cell: ({ row }) => {
       const value: number = row.getValue('balance');
 
@@ -49,9 +47,11 @@ const getColumns = ({
   {
     accessorKey: 'notes',
     header: 'Notes',
+    maxSize: 100,
   },
   {
     id: 'actions',
+    maxSize: 100,
     cell: ({ row }) => {
       return (
         <TableActions<Row<BankAccount>>

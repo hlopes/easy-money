@@ -1,35 +1,30 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { LuPlus } from 'react-icons/lu';
+import type { BankAccount } from '@prisma/client';
 
-import { Button } from '@/components/ui/button';
-import type serverClient from '@/lib/trpc/serverClient';
+import {
+  BankAccountsTable,
+  getColumns,
+} from '@/app/(bankAccounts)/components/bank-accounts-table';
+import BankAccountsDialog from '@/app/(bankAccounts)/components/BankAccountsDialog';
+import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
+import ButtonAdd from '@/components/ButtonAdd';
+import PageTop from '@/components/PageTop';
 
-import useBankAccounts from '../hooks/useBankAccounts';
-
-import getColumns from './bank-accounts-table/columns';
-import BankAccountsTable from './bank-accounts-table';
-import BankAccountsDialog from './BankAccountsDialog';
-
-interface BankAccountManagerProps {
-  initialBankAccounts: Awaited<
-    ReturnType<(typeof serverClient)['getBankAccounts']>
-  >;
-}
+type BankAccountManagerProps = {
+  initialBankAccounts: BankAccount[];
+};
 
 export default function BankAccountManager({
   initialBankAccounts,
 }: BankAccountManagerProps) {
   const {
     bankAccounts,
-    isLoadingCreateBankAccount,
-    isLoadingUpdateBankAccount,
-    isLoadingDeleteBankAccount,
     createBankAccount,
     updateBankAccount,
     deleteBankAccount,
-  } = useBankAccounts({ initialBankAccounts });
+  } = useBankAccounts(initialBankAccounts);
 
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
@@ -47,7 +42,9 @@ export default function BankAccountManager({
   const columns = useMemo(
     () =>
       getColumns({
-        onDelete: deleteBankAccount,
+        onDelete: async (id) => {
+          deleteBankAccount(id);
+        },
         onEdit: (id) => {
           setSelectedBankAccountIdForEdit(id);
         },
@@ -55,33 +52,28 @@ export default function BankAccountManager({
     [deleteBankAccount]
   );
 
+  const handleOpenDialog = () => setIsFormModalOpen(true);
+
+  const handleCloseDialog = () => {
+    setIsFormModalOpen(false);
+
+    setSelectedBankAccountIdForEdit(null);
+  };
+
   return (
     <>
-      <section className="prose my-2 w-full flex justify-between">
-        <h2 className="mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
-          Bank Accounts
-        </h2>
-        <Button
-          onClick={() => setIsFormModalOpen(true)}
-          disabled={isLoadingDeleteBankAccount}>
-          <LuPlus />
-          Add New
-        </Button>
-      </section>
+      <PageTop title="Bank Accounts">
+        <ButtonAdd onClick={handleOpenDialog} />
+      </PageTop>
       <div className="overflow-x-auto my-2">
         <BankAccountsTable columns={columns} bankAccounts={bankAccounts} />
       </div>
       <BankAccountsDialog
         open={isFormModalOpen || !!selectedBankAccountIdForEdit}
-        onClose={() => {
-          setIsFormModalOpen(false);
-
-          setSelectedBankAccountIdForEdit(null);
-        }}
-        isLoading={isLoadingCreateBankAccount || isLoadingUpdateBankAccount}
         bankAccount={selectedBankAccountForEdit}
-        onCreate={createBankAccount}
+        onAdd={createBankAccount}
         onUpdate={updateBankAccount}
+        onClose={handleCloseDialog}
       />
     </>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +13,7 @@ import {
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { CalendarIcon } from '@radix-ui/react-icons';
 
+import getCategories from '@/app/(transactions)/actions/getCategories';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -53,23 +54,21 @@ import type { TransactionFormData } from './schema';
 import schema from './schema';
 
 interface TransactionFormProps {
-  isLoading: boolean;
   transaction?: Transaction;
   bankAccounts: BankAccount[];
   categories: Category[];
+  onAdd(arg: TransactionFormData): void;
+  onUpdate(arg: string, arg2: TransactionFormData): void;
   onClose(): void;
-  onCreate(arg: TransactionFormData): void;
-  onUpdate(arg: TransactionFormData & { id: string }): void;
 }
 
 export default function TransactionForm({
-  isLoading = false,
   transaction,
   bankAccounts,
   categories,
-  onClose = () => {},
-  onCreate,
+  onAdd,
   onUpdate,
+  onClose = () => {},
 }: TransactionFormProps) {
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(schema),
@@ -84,9 +83,9 @@ export default function TransactionForm({
 
   const onSubmit = async (data: TransactionFormData) => {
     if (transaction) {
-      await onUpdate({ ...data, id: transaction.id });
+      await onUpdate(transaction.id, data);
     } else {
-      await onCreate(data);
+      await onAdd(data);
     }
 
     onClose();
@@ -180,11 +179,7 @@ export default function TransactionForm({
               <FormItem>
                 <FormLabel>Category</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Category"
-                    disabled={isLoading}
-                    {...field}
-                  />
+                  <Input placeholder="Category" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -295,12 +290,7 @@ export default function TransactionForm({
               <FormItem>
                 <FormLabel>Balance</FormLabel>
                 <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="Value"
-                    disabled={isLoading}
-                    {...field}
-                  />
+                  <Input type="number" placeholder="Value" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -316,7 +306,6 @@ export default function TransactionForm({
                     placeholder="Bank Account notes"
                     maxLength={500}
                     className="resize-none"
-                    disabled={isLoading}
                     {...field}
                   />
                 </FormControl>
@@ -325,7 +314,7 @@ export default function TransactionForm({
           />
         </ScrollArea>
         <div className="flex justify-end">
-          <Button disabled={isLoading}>Save</Button>
+          <Button>Save</Button>
         </div>
       </form>
     </Form>

@@ -1,82 +1,62 @@
-import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
-import trpc from '@/lib/trpc/client';
-import type serverClient from '@/lib/trpc/serverClient';
+import type { Transaction } from '@prisma/client';
 
-interface UseTransactionsArgs {
-  initialTransactions: Awaited<
-    ReturnType<(typeof serverClient)['getTransactions']>
-  >;
-}
+import {
+  createTransaction as createTransactionAction,
+  deleteTransaction as deleteTransactionAction,
+  updateTransaction as updateTransactionAction,
+} from '@/app/(transactions)/actions';
+import type { TransactionFormData } from '@/app/(transactions)/components/transaction-form/schema';
+import { useToast } from '@/components/ui/use-toast';
 
-export default function useTransactions({
-  initialTransactions,
-}: UseTransactionsArgs) {
-  const { refetchBankAccounts } = useBankAccounts();
+import useOptimisticTransactions from './useOptimisticTransactions';
 
-  const {
-    refetch: refetchTransactions,
-    data: transactions,
-    isFetching: isFetchingTransactions,
-  } = trpc.getTransactions.useQuery(undefined, {
-    initialData: initialTransactions,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-  });
+export default function useTransactions(initialTransactions: Transaction[]) {
+  const { toast } = useToast();
 
   const {
-    refetch: refetchCategories,
-    data: categories,
-    isFetching: isFetchingCategories,
-  } = trpc.getCategories.useQuery(undefined, {
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-  });
+    optimisticAddTransaction,
+    optimisticDeleteTransaction,
+    optimisticTransactions,
+    optimisticUpdateTransaction,
+  } = useOptimisticTransactions(initialTransactions);
 
-  const { mutate: createTransaction, isLoading: isLoadingCreateTransaction } =
-    trpc.createTransaction.useMutation({
-      onSuccess: () => {
-        refetchTransactions();
+  const createTransaction = async (data: TransactionFormData) => {
+    const { category, ...restData } = data;
 
-        refetchBankAccounts();
+    const transactionToAdd = { ...restData, notes: data.notes ?? null };
 
-        refetchCategories();
-      },
-    });
+    await createTransactionAction(transactionToAdd, category);
 
-  const { mutate: updateTransaction, isLoading: isLoadingUpdateTransaction } =
-    trpc.updateTransaction.useMutation({
-      onSuccess: () => {
-        refetchTransactions();
+    optimisticAddTransaction(transactionToAdd);
+  };
 
-        refetchBankAccounts();
+  const updateTransaction = async (id: string, data: TransactionFormData) => {
+    const transactionToUpdate = { ...data, id, notes: data.notes ?? null };
 
-        refetchCategories();
-      },
-    });
+    await updateTransactionAction(transactionToUpdate);
 
-  const { mutate: deleteTransaction, isLoading: isLoadingDeleteTransaction } =
-    trpc.deleteTransaction.useMutation({
-      onSuccess: () => {
-        refetchTransactions();
+    optimisticUpdateTransaction(transactionToUpdate);
+  };
 
-        refetchBankAccounts();
+  const deleteTransaction = async (id: string) => {
+    optimisticDeleteTransaction(id);
 
-        refetchCategories();
-      },
-    });
+    const response = await deleteTransactionAction(id);
+
+    if ('error' in response) {
+      toast({
+        variant: 'destructive',
+        title: 'Transaction Error',
+        description:
+          'Something went wrong while trying to delete the transaction.',
+      });
+    }
+  };
 
   return {
-    transactions,
-    categories,
-    isFetchingTransactions,
-    isFetchingCategories,
-    isLoadingCreateTransaction,
-    isLoadingUpdateTransaction,
-    isLoadingDeleteTransaction,
-    refetchTransactions,
+    transactions: optimisticTransactions ?? [],
     createTransaction,
     updateTransaction,
     deleteTransaction,
-    refetchCategories,
   };
 }

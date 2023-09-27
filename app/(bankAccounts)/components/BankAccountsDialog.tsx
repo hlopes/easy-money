@@ -1,7 +1,7 @@
-'use client';
-
 import type { BankAccount } from '@prisma/client';
 
+import BankAccountForm from '@/app/(bankAccounts)/components/bank-account-form';
+import type { BankAccountFormData } from '@/app/(bankAccounts)/components/bank-account-form/schema';
 import {
   Dialog,
   DialogContent,
@@ -10,25 +10,20 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-import type { BankAccountFormData } from './bank-account-form/schema';
-import BankAccountForm from './bank-account-form';
-
-interface BankAccountsDialogProps {
-  isLoading: boolean;
-  bankAccount?: BankAccount;
+type BankAccountsDialogProps = {
   open: boolean;
+  bankAccount?: BankAccount;
+  onAdd(arg: BankAccountFormData): Promise<void>;
+  onUpdate(arg: string, arg2: BankAccountFormData): Promise<void>;
   onClose(): void;
-  onCreate(arg: BankAccountFormData): void;
-  onUpdate(arg: BankAccountFormData & { id: string }): void;
-}
+};
 
 export default function BankAccountsDialog({
-  isLoading,
-  bankAccount,
   open,
-  onClose,
-  onCreate,
+  bankAccount,
+  onAdd,
   onUpdate,
+  onClose,
 }: BankAccountsDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -36,15 +31,16 @@ export default function BankAccountsDialog({
         <DialogHeader>
           <DialogTitle>New bank account</DialogTitle>
           <DialogDescription>
-            Add the details for the new bank account.
+            {bankAccount
+              ? 'Update the details of the bank account.'
+              : 'Add the details for the new bank account.'}
           </DialogDescription>
         </DialogHeader>
         <BankAccountForm
-          isLoading={isLoading}
-          onClose={onClose}
           bankAccount={bankAccount}
-          onCreate={onCreate}
+          onAdd={onAdd}
           onUpdate={onUpdate}
+          onClose={onClose}
         />
       </DialogContent>
     </Dialog>

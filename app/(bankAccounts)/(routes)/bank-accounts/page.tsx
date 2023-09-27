@@ -1,9 +1,8 @@
-import serverClient from '@/lib/trpc/serverClient';
-
-import { BankAccountManager } from '../../components';
+import getBankAccounts from '@/app/(bankAccounts)/actions/getBankAccounts';
+import { BankAccountManager } from '@/app/(bankAccounts)/components';
 
 export default async function BankAccounts() {
-  const bankAccounts = await serverClient.getBankAccounts();
+  const bankAccounts = await getBankAccounts();
 
   return <BankAccountManager initialBankAccounts={bankAccounts} />;
 }

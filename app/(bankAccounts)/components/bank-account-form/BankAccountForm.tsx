@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
@@ -28,20 +26,18 @@ import { cn } from '@/lib/utils';
 import type { BankAccountFormData } from './schema';
 import schema from './schema';
 
-interface BankAccountFormProps {
-  isLoading: boolean;
+type BankAccountFormProps = {
   bankAccount?: BankAccount;
+  onAdd(arg: BankAccountFormData): Promise<void>;
+  onUpdate(arg: string, arg2: BankAccountFormData): Promise<void>;
   onClose(): void;
-  onCreate(arg: BankAccountFormData): void;
-  onUpdate(arg: BankAccountFormData & { id: string }): void;
-}
+};
 
 export default function BankAccountForm({
-  isLoading = false,
   bankAccount,
-  onClose = () => {},
-  onCreate,
+  onAdd,
   onUpdate,
+  onClose = () => {},
 }: BankAccountFormProps) {
   const form = useForm<BankAccountFormData>({
     resolver: zodResolver(schema),
@@ -54,9 +50,9 @@ export default function BankAccountForm({
 
   const onSubmit = async (data: BankAccountFormData) => {
     if (bankAccount) {
-      await onUpdate({ ...data, id: bankAccount.id });
+      await onUpdate(bankAccount.id, data);
     } else {
-      await onCreate(data);
+      await onAdd(data);
     }
 
     onClose();
@@ -85,11 +81,7 @@ export default function BankAccountForm({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Bank account name"
-                  disabled={isLoading}
-                  {...field}
-                />
+                <Input placeholder="Bank account name" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -136,12 +128,7 @@ export default function BankAccountForm({
             <FormItem>
               <FormLabel>Balance</FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Initial balance"
-                  disabled={isLoading}
-                  {...field}
-                />
+                <Input type="number" placeholder="Initial balance" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -157,7 +144,6 @@ export default function BankAccountForm({
                   placeholder="Bank Account notes"
                   maxLength={500}
                   className="resize-none"
-                  disabled={isLoading}
                   {...field}
                 />
               </FormControl>
@@ -165,7 +151,7 @@ export default function BankAccountForm({
           )}
         />
         <div className="flex justify-end">
-          <Button disabled={isLoading}>Save</Button>
+          <Button disabled={form.formState.isSubmitting}>Save</Button>
         </div>
       </form>
     </Form>

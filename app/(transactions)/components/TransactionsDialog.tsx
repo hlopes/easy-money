@@ -14,25 +14,23 @@ import type { TransactionFormData } from './transaction-form/schema';
 import TransactionForm from './transaction-form/TransactionForm';
 
 interface TransactionDialogProps {
-  isLoading: boolean;
+  open: boolean;
   bankAccounts: BankAccount[];
   categories: Category[];
   transaction?: Transaction;
-  open: boolean;
+  onAdd(arg: TransactionFormData): void;
+  onUpdate(arg: string, arg2: TransactionFormData): void;
   onClose(): void;
-  onCreate(arg: TransactionFormData): void;
-  onUpdate(arg: TransactionFormData & { id: string }): void;
 }
 
 export default function TransactionDialog({
-  isLoading,
+  open,
   bankAccounts,
   categories,
   transaction,
-  open,
-  onClose,
-  onCreate,
+  onAdd,
   onUpdate,
+  onClose,
 }: TransactionDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -44,13 +42,12 @@ export default function TransactionDialog({
           </DialogDescription>
         </DialogHeader>
         <TransactionForm
-          isLoading={isLoading}
-          onClose={onClose}
           transaction={transaction}
           bankAccounts={bankAccounts}
           categories={categories}
-          onCreate={onCreate}
+          onAdd={onAdd}
           onUpdate={onUpdate}
+          onClose={onClose}
         />
       </DialogContent>
     </Dialog>

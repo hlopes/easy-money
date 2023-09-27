@@ -6,7 +6,7 @@ const schema = zod.object({
   date: zod.date(),
   notes: zod.string().optional(),
   value: zod.coerce.number(),
-  type: zod.union([zod.literal('INCOME'), zod.literal('EXPENSE')]).optional(),
+  type: zod.union([zod.literal('INCOME'), zod.literal('EXPENSE')]),
   category: zod.string().optional(),
 });
 

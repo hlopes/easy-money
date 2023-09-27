@@ -1,53 +1,58 @@
-import trpc from '@/lib/trpc/client';
-import type serverClient from '@/lib/trpc/serverClient';
+import type { BankAccount } from '@prisma/client';
 
-interface UseBankAccountsArgs {
-  initialBankAccounts: Awaited<
-    ReturnType<(typeof serverClient)['getBankAccounts']>
-  >;
-}
+import {
+  createBankAccount as createBankAccountAction,
+  deleteBankAccount as deleteBankAccountAction,
+  updateBankAccount as updateBankAccountAction,
+} from '@/app/(bankAccounts)/actions';
+import type { BankAccountFormData } from '@/app/(bankAccounts)/components/bank-account-form/schema';
+import { useToast } from '@/components/ui/use-toast';
 
-export default function useBankAccounts(args?: UseBankAccountsArgs) {
-  const initialBankAccounts = args?.initialBankAccounts ?? [];
+import useOptimisticBankAccounts from './useOptimisticBankAccounts';
+
+export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
+  const { toast } = useToast();
 
   const {
-    refetch: refetchBankAccounts,
-    data: bankAccounts,
-    isFetching: isFetchingGetBankAccounts,
-  } = trpc.getBankAccounts.useQuery(undefined, {
-    initialData: initialBankAccounts,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-  });
+    optimisticBankAccounts,
+    optimisticAddBankAccount,
+    optimisticUpdateBankAccount,
+    optimisticDeleteBankAccount,
+  } = useOptimisticBankAccounts(initialBankAccounts);
 
-  const { mutate: createBankAccount, isLoading: isLoadingCreateBankAccount } =
-    trpc.createBankAccount.useMutation({
-      onSettled: () => {
-        refetchBankAccounts();
-      },
-    });
+  const createBankAccount = async (data: BankAccountFormData) => {
+    const bankAccountToAdd = { ...data, notes: data.notes ?? null };
 
-  const { mutate: updateBankAccount, isLoading: isLoadingUpdateBankAccount } =
-    trpc.updateBankAccount.useMutation({
-      onSettled: () => {
-        refetchBankAccounts();
-      },
-    });
+    await createBankAccountAction(bankAccountToAdd);
 
-  const { mutate: deleteBankAccount, isLoading: isLoadingDeleteBankAccount } =
-    trpc.deleteBankAccount.useMutation({
-      onSettled: () => {
-        refetchBankAccounts();
-      },
-    });
+    optimisticAddBankAccount(bankAccountToAdd);
+  };
+
+  const updateBankAccount = async (id: string, data: BankAccountFormData) => {
+    const bankAccountToUpdate = { ...data, id, notes: data.notes ?? null };
+
+    await updateBankAccountAction(bankAccountToUpdate);
+
+    optimisticUpdateBankAccount(bankAccountToUpdate);
+  };
+
+  const deleteBankAccount = async (id: string) => {
+    optimisticDeleteBankAccount(id);
+
+    const response = await deleteBankAccountAction(id);
+
+    if ('error' in response) {
+      toast({
+        variant: 'destructive',
+        title: 'BankAccount Error',
+        description:
+          'Something went wrong while trying to delete the bank account.',
+      });
+    }
+  };
 
   return {
-    bankAccounts,
-    isFetchingGetBankAccounts,
-    isLoadingCreateBankAccount,
-    isLoadingUpdateBankAccount,
-    isLoadingDeleteBankAccount,
-    refetchBankAccounts,
+    bankAccounts: optimisticBankAccounts ?? [],
     createBankAccount,
     updateBankAccount,
     deleteBankAccount,

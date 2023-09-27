@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { LuPlus } from 'react-icons/lu';
+import type { BankAccount, Category, Transaction } from '@prisma/client';
 
 import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
-import { Button } from '@/components/ui/button';
-import type serverClient from '@/lib/trpc/serverClient';
+import ButtonAdd from '@/components/ButtonAdd';
+import PageTop from '@/components/PageTop';
 
 import useTransactions from '../hooks/useTransactions';
 
@@ -13,29 +13,22 @@ import TransactionsTable from './transaction-table';
 import TransactionDialog from './TransactionsDialog';
 
 interface TransactionsManagerProps {
-  initialTransactions: Awaited<
-    ReturnType<(typeof serverClient)['getTransactions']>
-  >;
-  initialBankAccounts: Awaited<
-    ReturnType<(typeof serverClient)['getBankAccounts']>
-  >;
+  initialTransactions: Transaction[];
+  initialBankAccounts: BankAccount[];
+  initialCategories: Category[];
 }
 
 export default function TransactionsManager({
   initialTransactions,
   initialBankAccounts,
+  initialCategories,
 }: TransactionsManagerProps) {
   const {
     transactions,
-    categories,
-    isFetchingCategories,
-    isLoadingCreateTransaction,
-    isLoadingUpdateTransaction,
-    isLoadingDeleteTransaction,
     createTransaction,
     updateTransaction,
     deleteTransaction,
-  } = useTransactions({ initialTransactions });
+  } = useTransactions(initialTransactions);
 
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
@@ -50,21 +43,21 @@ export default function TransactionsManager({
     [transactions, selectedTransactionIdForEdit]
   );
 
-  const { bankAccounts } = useBankAccounts({ initialBankAccounts });
+  const { bankAccounts } = useBankAccounts(initialBankAccounts);
+
+  const handleOpenDialog = () => setIsFormModalOpen(true);
+
+  const handleCloseDialog = () => {
+    setIsFormModalOpen(false);
+
+    setSelectedTransactionIdForEdit(null);
+  };
 
   return (
     <>
-      <section className="prose my-2 w-full flex justify-between">
-        <h2 className="mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
-          Transactions
-        </h2>
-        <Button
-          onClick={() => setIsFormModalOpen(true)}
-          disabled={isLoadingDeleteTransaction}>
-          <LuPlus />
-          Add New
-        </Button>
-      </section>
+      <PageTop title="Transactions">
+        <ButtonAdd onClick={handleOpenDialog} />
+      </PageTop>
       <div className="overflow-x-auto my-2">
         <TransactionsTable
           transactions={transactions}
@@ -75,22 +68,13 @@ export default function TransactionsManager({
         />
       </div>
       <TransactionDialog
-        isLoading={
-          isFetchingCategories ||
-          isLoadingCreateTransaction ||
-          isLoadingUpdateTransaction
-        }
         open={isFormModalOpen || !!selectedTransactionIdForEdit}
-        onClose={() => {
-          setIsFormModalOpen(false);
-
-          setSelectedTransactionIdForEdit(null);
-        }}
         transaction={selectedTransactionForEdit}
         bankAccounts={bankAccounts}
-        categories={categories ?? []}
-        onCreate={createTransaction}
+        categories={initialCategories}
+        onAdd={createTransaction}
         onUpdate={updateTransaction}
+        onClose={handleCloseDialog}
       />
     </>
   );

@@ -1,3 +1,5 @@
+import PageTop from '@/components/PageTop';
+
 export default function Dashboard() {
-  return <h3>Dashboard</h3>;
+  return <PageTop title="Dashboard" />;
 }

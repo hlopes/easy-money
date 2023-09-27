@@ -19,18 +19,18 @@ export default function SideNav({ children }: PropsWithChildren) {
           'fixed inset-y-0 left-0 w-full h-screen bg-white dark:bg-background shadow-md transform transition-transform duration-300 ease-in-out z-10 lg:static border-r-2 mt-[65px] lg:mt-0 md:w-64',
           !isOpen && '-translate-x-full lg:-translate-x-0'
         )}>
-        <div className="p-4 prose">
+        <div className="p-4 prose text-lg">
           <h3>Menu</h3>
         </div>
         <nav>
           <ul>
-            <li className="ml-6 mb-2 text-sm" onClick={() => setIsOpen(false)}>
+            <li className="ml-6 mb-2" onClick={() => setIsOpen(false)}>
               <Link href="/">Dashboard</Link>
             </li>
-            <li className="ml-6 mb-2 text-sm" onClick={() => setIsOpen(false)}>
+            <li className="ml-6 mb-2" onClick={() => setIsOpen(false)}>
               <Link href="/bank-accounts">BankAccounts</Link>
             </li>
-            <li className="ml-6 mb-2 text-sm" onClick={() => setIsOpen(false)}>
+            <li className="ml-6 mb-2" onClick={() => setIsOpen(false)}>
               <Link href="/transactions">Transactions</Link>
             </li>
           </ul>
