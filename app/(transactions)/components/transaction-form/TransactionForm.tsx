@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -68,6 +68,8 @@ export default function TransactionForm({
   onUpdate,
   onClose = () => {},
 }: TransactionFormProps) {
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -75,7 +77,8 @@ export default function TransactionForm({
       value: 0,
       notes: '',
       type: TransactionType.INCOME,
-      bankAccountId: bankAccounts.at(0)?.id ?? '',
+      bankAccountId: transaction?.bankAccountId ?? bankAccounts.at(0)?.id ?? '',
+      categoryId: transaction?.categoryId ?? categories.at(0)?.id ?? '',
     },
   });
 
@@ -113,7 +116,7 @@ export default function TransactionForm({
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Category</FormLabel>
-              <Popover>
+              <Popover open={isCategoryOpen} onOpenChange={setIsCategoryOpen}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
@@ -125,7 +128,7 @@ export default function TransactionForm({
                       )}>
                       {field.value
                         ? categories.find(
-                            (category) => category.name === field.value
+                            (category) => category.id === field.value
                           )?.name
                         : 'Select category'}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -147,6 +150,8 @@ export default function TransactionForm({
                             key={category.name}
                             onSelect={() => {
                               form.setValue('categoryId', category.id);
+
+                              setIsCategoryOpen(false);
                             }}>
                             {category.name}
                             <CheckIcon

@@ -4,7 +4,7 @@ import {
 } from 'react';
 import type { Transaction } from '@prisma/client';
 
-import type { TransactionWithCategories } from '../types';
+import type { TransactionWithCategory } from '../types';
 
 enum ActionTypes {
   ADD = 'add',
@@ -14,12 +14,12 @@ enum ActionTypes {
 
 type AddTransaction = Pick<
   Transaction,
-  'date' | 'value' | 'type' | 'notes' | 'bankAccountId'
+  'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
 >;
 
 type UpdateTransaction = Pick<
   Transaction,
-  'id' | 'date' | 'value' | 'type' | 'notes' | 'bankAccountId'
+  'id' | 'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
 >;
 
 type TransactionAction = {
@@ -28,9 +28,9 @@ type TransactionAction = {
 };
 
 type TransactionReducer = (
-  state: TransactionWithCategories[],
+  state: TransactionWithCategory[],
   action: TransactionAction
-) => TransactionWithCategories[];
+) => TransactionWithCategory[];
 
 function checkTransaction(
   obj: string | AddTransaction | Transaction
@@ -44,6 +44,8 @@ const transactionsReducer: TransactionReducer = (state, action) => {
       ...state,
       {
         ...action.payload,
+        bankAccount: { name: '' },
+        category: { name: '' },
         id: crypto.randomUUID(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -56,15 +58,23 @@ const transactionsReducer: TransactionReducer = (state, action) => {
     typeof action.payload === 'object' &&
     checkTransaction(action.payload)
   ) {
-    const argTransaction = action.payload as Transaction;
+    const argTransaction = action.payload as TransactionWithCategory;
 
     return [
       ...state.map((transaction) => {
         if (transaction.id === argTransaction.id) {
-          return { ...argTransaction };
+          return {
+            ...argTransaction,
+            bankAccount: { name: '' },
+            category: { name: '' },
+          };
         }
 
-        return transaction;
+        return {
+          ...transaction,
+          bankAccount: { name: '' },
+          category: { name: '' },
+        };
       }),
       {
         ...action.payload,

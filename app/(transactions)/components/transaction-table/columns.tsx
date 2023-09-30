@@ -5,7 +5,7 @@ import type { ColumnDef, Row } from '@tanstack/react-table';
 import TableActions from '@/components/TableActions';
 import { formatDateToDisplay } from '@/helpers/dates';
 
-import type { TransactionWithCategories } from '../../types';
+import type { TransactionWithCategory } from '../../types';
 
 interface GetColumnsArgs {
   onEdit(arg: string): void;
@@ -15,7 +15,7 @@ interface GetColumnsArgs {
 const getColumns = ({
   onEdit,
   onDelete,
-}: GetColumnsArgs): ColumnDef<TransactionWithCategories>[] => [
+}: GetColumnsArgs): ColumnDef<TransactionWithCategory>[] => [
   {
     accessorKey: 'bankAccount',
     header: 'Account',
@@ -40,7 +40,7 @@ const getColumns = ({
     accessorKey: 'category',
     header: 'Category',
     cell: ({ row }) => {
-      return row.original.categories?.at(0)?.category?.name ?? '';
+      return row.original.category.name ?? '';
     },
   },
   {

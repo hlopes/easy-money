@@ -8,8 +8,6 @@ import { prisma } from '@/lib/prisma';
 
 import { BANK_ACCOUNTS_PATH } from './constants';
 
-// import { BANK_ACCOUNTS_TAG } from './tags';
-
 export default async function deleteBankAccount(
   id: string
 ): Promise<BankAccount | ErrorResponse> {
@@ -22,8 +20,6 @@ export default async function deleteBankAccount(
 
     return bankAccount;
   } catch (error) {
-    console.log('### ', error);
-
     return { error: true };
   }
 }

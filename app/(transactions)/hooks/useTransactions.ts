@@ -1,5 +1,3 @@
-import type { Transaction } from '@prisma/client';
-
 import {
   createTransaction as createTransactionAction,
   deleteTransaction as deleteTransactionAction,
@@ -8,12 +6,12 @@ import {
 import type { TransactionFormData } from '@/app/(transactions)/components/transaction-form/schema';
 import { useToast } from '@/components/ui/use-toast';
 
-import type { TransactionWithCategories } from '../types';
+import type { TransactionWithCategory } from '../types';
 
 import useOptimisticTransactions from './useOptimisticTransactions';
 
 export default function useTransactions(
-  initialTransactions: TransactionWithCategories[]
+  initialTransactions: TransactionWithCategory[]
 ) {
   const { toast } = useToast();
 

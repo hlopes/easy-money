@@ -5,10 +5,12 @@ import type { Transaction } from '@prisma/client';
 
 import { DataTable } from '@/components/ui/data-table';
 
+import type { TransactionWithCategory } from '../../types';
+
 import getColumns from './columns';
 
 interface TransactionsTableProps {
-  transactions: Transaction[];
+  transactions: TransactionWithCategory[];
   onEdit(arg: string): void;
   onDelete(arg: string): void;
 }

@@ -2,13 +2,8 @@ import type { BankAccount, Category, Transaction } from '@prisma/client';
 
 type TransactionWithBankAccount = Transaction & { bankAccount: BankAccount };
 
-type TransactionWithCategories = TransactionWithBankAccount & {
-  categories?: {
-    category: Category;
-    transactionId: string;
-    categoryId: string;
-    assignedAt: Date;
-  }[];
+type TransactionWithCategory = TransactionWithBankAccount & {
+  category: Category;
 };
 
-export type { TransactionWithBankAccount, TransactionWithCategories };
+export type { TransactionWithBankAccount, TransactionWithCategory };

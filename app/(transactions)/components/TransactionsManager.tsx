@@ -1,20 +1,20 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { BankAccount, Category, Transaction } from '@prisma/client';
+import type { BankAccount, Category } from '@prisma/client';
 
 import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
 import ButtonAdd from '@/components/ButtonAdd';
 import PageTop from '@/components/PageTop';
 
 import useTransactions from '../hooks/useTransactions';
-import type { TransactionWithCategories } from '../types';
+import type { TransactionWithCategory } from '../types';
 
 import TransactionsTable from './transaction-table';
 import TransactionDialog from './TransactionsDialog';
 
 interface TransactionsManagerProps {
-  initialTransactions: TransactionWithCategories[];
+  initialTransactions: TransactionWithCategory[];
   initialBankAccounts: BankAccount[];
   initialCategories: Category[];
 }
