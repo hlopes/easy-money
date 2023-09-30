@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { Transaction } from '@prisma/client';
 
 import { DataTable } from '@/components/ui/data-table';
 

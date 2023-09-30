@@ -20,7 +20,7 @@ const getColumns = ({
     accessorKey: 'bankAccount',
     header: 'Account',
     cell: ({ row }) => {
-      return <p className="max-w-xs">{row.original.bankAccount.name}</p>;
+      return <p className="max-w-xs">{row.original.bankAccount?.name ?? ''}</p>;
     },
   },
   {
@@ -40,7 +40,7 @@ const getColumns = ({
     accessorKey: 'category',
     header: 'Category',
     cell: ({ row }) => {
-      return row.original.category.name ?? '';
+      return row.original.category?.name ?? '';
     },
   },
   {
