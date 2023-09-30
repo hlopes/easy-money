@@ -1,7 +1,16 @@
-import type { Transaction } from '@prisma/client';
+import type { PrismaPromise } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
 
-export default async function getTransactions(): Promise<Transaction[]> {
-  return prisma.transaction.findMany();
+import type { TransactionWithCategories } from '../types';
+
+export default function getTransactions(): PrismaPromise<
+  TransactionWithCategories[]
+> {
+  return prisma.transaction.findMany({
+    include: {
+      bankAccount: true,
+      category: true,
+    },
+  });
 }

@@ -8,9 +8,13 @@ import {
 import type { TransactionFormData } from '@/app/(transactions)/components/transaction-form/schema';
 import { useToast } from '@/components/ui/use-toast';
 
+import type { TransactionWithCategories } from '../types';
+
 import useOptimisticTransactions from './useOptimisticTransactions';
 
-export default function useTransactions(initialTransactions: Transaction[]) {
+export default function useTransactions(
+  initialTransactions: TransactionWithCategories[]
+) {
   const { toast } = useToast();
 
   const {
@@ -21,11 +25,9 @@ export default function useTransactions(initialTransactions: Transaction[]) {
   } = useOptimisticTransactions(initialTransactions);
 
   const createTransaction = async (data: TransactionFormData) => {
-    const { category, ...restData } = data;
+    const transactionToAdd = { ...data, notes: data.notes ?? null };
 
-    const transactionToAdd = { ...restData, notes: data.notes ?? null };
-
-    await createTransactionAction(transactionToAdd, category);
+    await createTransactionAction(transactionToAdd);
 
     optimisticAddTransaction(transactionToAdd);
   };

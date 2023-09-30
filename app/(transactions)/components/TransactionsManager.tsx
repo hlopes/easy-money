@@ -8,12 +8,13 @@ import ButtonAdd from '@/components/ButtonAdd';
 import PageTop from '@/components/PageTop';
 
 import useTransactions from '../hooks/useTransactions';
+import type { TransactionWithCategories } from '../types';
 
 import TransactionsTable from './transaction-table';
 import TransactionDialog from './TransactionsDialog';
 
 interface TransactionsManagerProps {
-  initialTransactions: Transaction[];
+  initialTransactions: TransactionWithCategories[];
   initialBankAccounts: BankAccount[];
   initialCategories: Category[];
 }

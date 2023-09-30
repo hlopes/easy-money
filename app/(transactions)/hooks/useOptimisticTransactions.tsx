@@ -4,6 +4,8 @@ import {
 } from 'react';
 import type { Transaction } from '@prisma/client';
 
+import type { TransactionWithCategories } from '../types';
+
 enum ActionTypes {
   ADD = 'add',
   UPDATE = 'update',
@@ -26,9 +28,9 @@ type TransactionAction = {
 };
 
 type TransactionReducer = (
-  state: Transaction[],
+  state: TransactionWithCategories[],
   action: TransactionAction
-) => Transaction[];
+) => TransactionWithCategories[];
 
 function checkTransaction(
   obj: string | AddTransaction | Transaction

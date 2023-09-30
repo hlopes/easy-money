@@ -10,42 +10,26 @@ import { TRANSACTIONS_PATH } from './constants';
 import { updateBankAccountBalance } from './helpers';
 
 export default async function createTransaction(
-  data: Omit<Transaction, 'id' | 'createdAt' | 'updatedAt'>,
-  category?: string
+  data: Omit<Transaction, 'id' | 'createdAt' | 'updatedAt'>
 ): Promise<Transaction | ErrorResponse> {
   try {
-    const { bankAccountId, ...inputs } = data;
-
-    const inputData = category
-      ? {
-          ...inputs,
-          bankAccount: {
-            connect: { id: bankAccountId },
-          },
-          categories: {
-            create: [
-              {
-                assignedAt: new Date(),
-                category: {
-                  create: {
-                    name: category ?? '',
-                  },
-                },
-              },
-            ],
-          },
-        }
-      : {
-          ...inputs,
-          bankAccount: {
-            connect: { id: bankAccountId },
-          },
-        };
+    const { bankAccountId, categoryId, ...inputs } = data;
 
     const newTransaction = await prisma.transaction.create({
-      data: inputData,
+      data: {
+        ...inputs,
+        bankAccount: {
+          connect: { id: bankAccountId },
+        },
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
+      },
       include: {
         bankAccount: true,
+        category: true,
       },
     });
 

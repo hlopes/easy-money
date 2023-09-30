@@ -5,6 +5,8 @@ import type { ColumnDef, Row } from '@tanstack/react-table';
 import TableActions from '@/components/TableActions';
 import { formatDateToDisplay } from '@/helpers/dates';
 
+import type { TransactionWithCategories } from '../../types';
+
 interface GetColumnsArgs {
   onEdit(arg: string): void;
   onDelete(arg: string): void;
@@ -13,7 +15,14 @@ interface GetColumnsArgs {
 const getColumns = ({
   onEdit,
   onDelete,
-}: GetColumnsArgs): ColumnDef<Transaction>[] => [
+}: GetColumnsArgs): ColumnDef<TransactionWithCategories>[] => [
+  {
+    accessorKey: 'bankAccount',
+    header: 'Account',
+    cell: ({ row }) => {
+      return <p className="max-w-xs">{row.original.bankAccount.name}</p>;
+    },
+  },
   {
     accessorKey: 'type',
     header: 'Type',
@@ -25,6 +34,13 @@ const getColumns = ({
       }
 
       return <LuArrowUpRight className="h-4 w-4 text-emerald-600" />;
+    },
+  },
+  {
+    accessorKey: 'category',
+    header: 'Category',
+    cell: ({ row }) => {
+      return row.original.categories?.at(0)?.category?.name ?? '';
     },
   },
   {
@@ -48,10 +64,6 @@ const getColumns = ({
 
       return <p className="text-emerald-600 font-semibold">{value}€</p>;
     },
-  },
-  {
-    accessorKey: 'notes',
-    header: 'Notes',
   },
   {
     id: 'actions',

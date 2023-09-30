@@ -1,6 +1,6 @@
 'use client';
 
-import { LuEdit3, LuEraser, LuLoader2 } from 'react-icons/lu';
+import { LuEraser, LuLoader2, LuPencil } from 'react-icons/lu';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
@@ -45,7 +45,7 @@ export default function TableActions<T extends { original: { id: string } }>({
           onClick={() => {
             onEdit(row.original.id);
           }}>
-          <LuEdit3 className="mr-2" />
+          <LuPencil className="mr-2" />
           Edit
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => onDelete(row.original.id)}>

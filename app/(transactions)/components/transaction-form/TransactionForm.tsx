@@ -25,7 +25,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -106,47 +105,48 @@ export default function TransactionForm({
 
   return bankAccounts.length ? (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <ScrollArea className="w-full h-96">
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Category</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn(
-                          'w-[200px] justify-between',
-                          !field.value && 'text-muted-foreground'
-                        )}>
-                        {field.value
-                          ? categories.find(
-                              (category) => category.name === field.value
-                            )?.name
-                          : 'Select category'}
-                        <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[200px] p-0">
-                    <Command>
-                      <CommandInput
-                        placeholder="Search framework..."
-                        className="h-9"
-                      />
-                      <CommandEmpty>No framework found.</CommandEmpty>
-                      <CommandGroup>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* Category */}
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Category</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        'w-full justify-between',
+                        !field.value && 'text-muted-foreground'
+                      )}>
+                      {field.value
+                        ? categories.find(
+                            (category) => category.name === field.value
+                          )?.name
+                        : 'Select category'}
+                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <Command>
+                    <CommandInput
+                      placeholder="Search category..."
+                      className="h-9"
+                    />
+                    <CommandEmpty>No category found</CommandEmpty>
+                    <CommandGroup>
+                      <ScrollArea className="h-60">
                         {categories.map((category) => (
                           <CommandItem
                             value={category.name}
                             key={category.name}
                             onSelect={() => {
-                              form.setValue('category', category.name);
+                              form.setValue('categoryId', category.id);
                             }}>
                             {category.name}
                             <CheckIcon
@@ -159,59 +159,16 @@ export default function TransactionForm({
                             />
                           </CommandItem>
                         ))}
-                      </CommandGroup>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-                <FormDescription>
-                  This is the category that will be used for transactions
-                  aggregation.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Category</FormLabel>
-                <FormControl>
-                  <Input placeholder="Category" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="bankAccountId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bank Account</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a bank account" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {bankAccounts.map((account) => (
-                      <SelectItem key={account.id} value={account.id}>
-                        {account.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormDescription>
-                  You can manage email addresses in your
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                      </ScrollArea>
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-between w-full">
+          {/* Type */}
           <FormField
             control={form.control}
             name="type"
@@ -243,45 +200,7 @@ export default function TransactionForm({
               );
             }}
           />
-          <FormField
-            control={form.control}
-            name="date"
-            render={({ field: { value, onChange } }) => (
-              <FormItem>
-                <FormLabel>Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn(
-                          'w-full pl-3 text-left font-normal',
-                          !value && 'text-muted-foreground'
-                        )}>
-                        {value ? (
-                          format(value, 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={value}
-                      onSelect={onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date('1900-01-01')
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              </FormItem>
-            )}
-          />
+          {/* Balance */}
           <FormField
             control={form.control}
             name="value"
@@ -294,24 +213,85 @@ export default function TransactionForm({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="notes"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Notes</FormLabel>
+        </div>
+        {/* BankAccount */}
+        <FormField
+          control={form.control}
+          name="bankAccountId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bank Account</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <Textarea
-                    placeholder="Bank Account notes"
-                    maxLength={500}
-                    className="resize-none"
-                    {...field}
-                  />
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a bank account" />
+                  </SelectTrigger>
                 </FormControl>
-              </FormItem>
-            )}
-          />
-        </ScrollArea>
+                <SelectContent>
+                  {bankAccounts.map((account) => (
+                    <SelectItem key={account.id} value={account.id}>
+                      {account.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        {/* Date */}
+        <FormField
+          control={form.control}
+          name="date"
+          render={({ field: { value, onChange } }) => (
+            <FormItem>
+              <FormLabel>Date</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={'outline'}
+                      className={cn(
+                        'w-full pl-3 text-left font-normal',
+                        !value && 'text-muted-foreground'
+                      )}>
+                      {value ? format(value, 'PPP') : <span>Pick a date</span>}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={value}
+                    onSelect={onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date('1900-01-01')
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </FormItem>
+          )}
+        />
+        {/* Notes */}
+        <FormField
+          control={form.control}
+          name="notes"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Notes</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Bank Account notes"
+                  maxLength={500}
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <div className="flex justify-end">
           <Button>Save</Button>
         </div>
