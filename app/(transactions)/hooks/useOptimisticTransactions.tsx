@@ -44,8 +44,6 @@ const transactionsReducer: TransactionReducer = (state, action) => {
       ...state,
       {
         ...action.payload,
-        bankAccount: { name: '' },
-        category: { name: '' },
         id: crypto.randomUUID(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -65,15 +63,11 @@ const transactionsReducer: TransactionReducer = (state, action) => {
         if (transaction.id === argTransaction.id) {
           return {
             ...argTransaction,
-            bankAccount: { name: '' },
-            category: { name: '' },
           };
         }
 
         return {
           ...transaction,
-          bankAccount: { name: '' },
-          category: { name: '' },
         };
       }),
       {
