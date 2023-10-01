@@ -4,6 +4,7 @@ import { TransactionType } from '@prisma/client';
 
 import getTotalBankAccounts from '@/app/(bankAccounts)/actions/getTotalBankAccounts';
 import getTotalByTransactionType from '@/app/(transactions)/actions/getTotalByTransactionType';
+import getTransactionTotalsByMonth from '@/app/(transactions)/actions/getTransactionTotalsByMonth';
 import PageTop from '@/components/PageTop';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -17,6 +18,8 @@ export default async function Dashboard() {
 
   const { totalCurrentMonth: totalIncomes, delta: incomesDelta } =
     await getTotalByTransactionType(TransactionType.INCOME);
+
+  const totalsByMonth = await getTransactionTotalsByMonth();
 
   return (
     <>
@@ -74,7 +77,7 @@ export default async function Dashboard() {
           <CardTitle>{format(new Date(), 'y')}</CardTitle>
         </CardHeader>
         <CardContent className="pl-2">
-          <YearChart />
+          <YearChart data={totalsByMonth} />
         </CardContent>
       </Card>
     </>

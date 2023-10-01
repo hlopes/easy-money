@@ -6,4 +6,14 @@ type TransactionWithCategory = TransactionWithBankAccount & {
   category?: Category;
 };
 
-export type { TransactionWithBankAccount, TransactionWithCategory };
+type TotalSeries = {
+  name: string;
+  totalIncomes: number;
+  totalExpenses: number;
+};
+
+export type {
+  TotalSeries,
+  TransactionWithBankAccount,
+  TransactionWithCategory,
+};
