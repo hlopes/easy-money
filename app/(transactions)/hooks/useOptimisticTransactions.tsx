@@ -13,18 +13,18 @@ enum ActionTypes {
 }
 
 type AddTransaction = Pick<
-  Transaction,
+  TransactionWithCategory,
   'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
 >;
 
 type UpdateTransaction = Pick<
-  Transaction,
+  TransactionWithCategory,
   'id' | 'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
 >;
 
 type TransactionAction = {
   type: ActionTypes;
-  payload: string | AddTransaction | Transaction;
+  payload: string | AddTransaction | TransactionWithCategory;
 };
 
 type TransactionReducer = (
@@ -89,7 +89,9 @@ const transactionsReducer: TransactionReducer = (state, action) => {
   return state;
 };
 
-export default function useOptimisticTransactions(transactions: Transaction[]) {
+export default function useOptimisticTransactions(
+  transactions: TransactionWithCategory[]
+) {
   const [optimisticTransactions, dispatchOptimisticTransactions] =
     useOptimistic(transactions, transactionsReducer);
 

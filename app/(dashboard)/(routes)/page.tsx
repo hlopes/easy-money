@@ -7,6 +7,8 @@ import getTotalByTransactionType from '@/app/(transactions)/actions/getTotalByTr
 import PageTop from '@/components/PageTop';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+import YearChart from '../components/YearChart';
+
 export default async function Dashboard() {
   const totalAccounts = await getTotalBankAccounts();
 
@@ -20,7 +22,7 @@ export default async function Dashboard() {
     <>
       <PageTop title="Dashboard" />
       <h2 className="text-center mb-4">{format(new Date(), 'LLLL y')}</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
@@ -67,6 +69,14 @@ export default async function Dashboard() {
           </CardContent>
         </Card>
       </div>
+      <Card className="col-span-4">
+        <CardHeader>
+          <CardTitle>{format(new Date(), 'y')}</CardTitle>
+        </CardHeader>
+        <CardContent className="pl-2">
+          <YearChart />
+        </CardContent>
+      </Card>
     </>
   );
 }
