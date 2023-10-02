@@ -18,7 +18,9 @@
     "coverage",
     "node_modules",
     "public",
-    "storybook-static"
+    "storybook-static",
+    ".lintstagedrc.js",
+    "commitlint.config.js"
   ],
   "rules": {
     "simple-import-sort/imports": [
