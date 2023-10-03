@@ -1,6 +1,5 @@
-import type { Transaction } from '@prisma/client';
-
 import { prisma } from '@/lib/prisma';
+import type { Transaction } from '@/prisma/client';
 
 export async function updateBankAccountBalance(
   transaction: Transaction,

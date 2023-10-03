@@ -1,11 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import type { Transaction } from '@prisma/client';
-import { TransactionType } from '@prisma/client';
 
 import type { ErrorResponse } from '@/app/types';
 import { prisma } from '@/lib/prisma';
+import type { Transaction } from '@/prisma/client';
+import { TransactionType } from '@/prisma/client';
 
 import { TRANSACTIONS_PATH } from './constants';
 import { updateBankAccountBalance } from './helpers';

@@ -20,7 +20,8 @@
     "public",
     "storybook-static",
     ".lintstagedrc.js",
-    "commitlint.config.js"
+    "commitlint.config.js",
+    "prisma"
   ],
   "rules": {
     "simple-import-sort/imports": [

@@ -1,0 +1,22 @@
+version: "3.8"
+services: 
+  frontend:
+    container_name: frontend
+    build:
+      context: . #if your Dockerfile is not at the same level change the path here (./frontend)
+      target: dev
+    restart: always
+    command: pnpm dev
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:!Y4a!eQGj3.5H6P@db.xaeinuxclwchutxmltot.supabase.co:5432/postgres
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=N3R54k+8ECmAHDjVtx8w+Qhm81U6RH1adPIJmdFc5Kw=
+      - DISCORD_CLIENT_ID=1151224060634742874
+      - DISCORD_CLIENT_SECRET=5HNt8JyZy48lEL8isHfJt0Wi-o85Z_uB
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - 3000:3000

@@ -1,7 +1,5 @@
 'use client';
 
-import type { BankAccount, Category, Transaction } from '@prisma/client';
-
 import {
   Dialog,
   DialogContent,
@@ -9,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import type { BankAccount, Category, Transaction } from '@/prisma/client';
 
 import type { TransactionFormData } from './transaction-form/schema';
 import TransactionForm from './transaction-form/TransactionForm';

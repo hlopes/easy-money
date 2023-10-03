@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { BankAccount } from '@prisma/client';
 
 import {
   BankAccountsTable,
@@ -11,6 +10,7 @@ import BankAccountsDialog from '@/app/(bankAccounts)/components/BankAccountsDial
 import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
 import ButtonAdd from '@/components/ButtonAdd';
 import PageTop from '@/components/PageTop';
+import type { BankAccount } from '@/prisma/client';
 
 type BankAccountManagerProps = {
   initialBankAccounts: BankAccount[];

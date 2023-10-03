@@ -1,7 +1,7 @@
 import { endOfMonth, startOfMonth, subMonths } from 'date-fns';
-import type { TransactionType } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
+import type { TransactionType } from '@/prisma/client';
 
 export default async function getTotalByTransactionType(
   type: TransactionType

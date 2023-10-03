@@ -1,10 +1,10 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import type { BankAccount } from '@prisma/client';
 
 import type { ErrorResponse } from '@/app/types';
 import { prisma } from '@/lib/prisma';
+import type { BankAccount } from '@/prisma/client';
 
 import { BANK_ACCOUNTS_PATH } from './constants';
 

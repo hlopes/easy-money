@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { BankAccount, Category } from '@prisma/client';
 
 import useBankAccounts from '@/app/(bankAccounts)/hooks/useBankAccounts';
 import ButtonAdd from '@/components/ButtonAdd';
 import PageTop from '@/components/PageTop';
+import type { BankAccount, Category } from '@/prisma/client';
 
 import useTransactions from '../hooks/useTransactions';
 import type { TransactionWithCategory } from '../types';
@@ -56,7 +56,7 @@ export default function TransactionsManager({
 
   return (
     <>
-      <PageTop title="Transactions">
+      <PageTop title="Transactions 234">
         <ButtonAdd onClick={handleOpenDialog} />
       </PageTop>
       <div className="overflow-x-auto my-2">

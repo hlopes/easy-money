@@ -2,7 +2,8 @@ import {
   experimental_useOptimistic as useOptimistic,
   useCallback,
 } from 'react';
-import type { BankAccount } from '@prisma/client';
+
+import type { BankAccount } from '@/prisma/client';
 
 enum ActionTypes {
   ADD = 'add',

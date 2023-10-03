@@ -1,5 +1,3 @@
-import type { BankAccount } from '@prisma/client';
-
 import BankAccountForm from '@/app/(bankAccounts)/components/bank-account-form';
 import type { BankAccountFormData } from '@/app/(bankAccounts)/components/bank-account-form/schema';
 import {
@@ -9,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import type { BankAccount } from '@/prisma/client';
 
 type BankAccountsDialogProps = {
   open: boolean;

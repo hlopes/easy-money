@@ -2,7 +2,8 @@ import {
   experimental_useOptimistic as useOptimistic,
   useCallback,
 } from 'react';
-import type { Transaction } from '@prisma/client';
+
+import type { Transaction } from '@/prisma/client';
 
 import type { TransactionWithCategory } from '../types';
 

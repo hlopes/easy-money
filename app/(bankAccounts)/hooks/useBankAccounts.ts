@@ -1,5 +1,3 @@
-import type { BankAccount } from '@prisma/client';
-
 import {
   createBankAccount as createBankAccountAction,
   deleteBankAccount as deleteBankAccountAction,
@@ -7,6 +5,7 @@ import {
 } from '@/app/(bankAccounts)/actions';
 import type { BankAccountFormData } from '@/app/(bankAccounts)/components/bank-account-form/schema';
 import { useToast } from '@/components/ui/use-toast';
+import type { BankAccount } from '@/prisma/client';
 
 import useOptimisticBankAccounts from './useOptimisticBankAccounts';
 

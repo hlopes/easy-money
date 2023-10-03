@@ -1,8 +1,8 @@
-import type { BankAccount } from '@prisma/client';
 import type { ColumnDef, Row } from '@tanstack/react-table';
 
 import TableActions from '@/components/TableActions';
 import { formatDateToDisplay } from '@/helpers/dates';
+import type { BankAccount } from '@/prisma/client';
 
 interface GetColumnsArgs {
   onEdit(arg: string): void;

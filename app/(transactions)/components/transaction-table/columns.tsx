@@ -1,9 +1,9 @@
 import { LuArrowDownRight, LuArrowUpRight } from 'react-icons/lu';
-import { type Transaction, TransactionType } from '@prisma/client';
 import type { ColumnDef, Row } from '@tanstack/react-table';
 
 import TableActions from '@/components/TableActions';
 import { formatDateToDisplay } from '@/helpers/dates';
+import { type Transaction, TransactionType } from '@/prisma/client';
 
 import type { TransactionWithCategory } from '../../types';
 

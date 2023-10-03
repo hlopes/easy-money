@@ -1,6 +1,5 @@
-import type { PrismaPromise } from '@prisma/client';
-
 import { prisma } from '@/lib/prisma';
+import type { PrismaPromise } from '@/prisma/client';
 
 import type { TransactionWithCategory } from '../types';
 

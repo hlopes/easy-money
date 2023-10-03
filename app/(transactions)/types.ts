@@ -1,4 +1,4 @@
-import type { BankAccount, Category, Transaction } from '@prisma/client';
+import type { BankAccount, Category, Transaction } from '@/prisma/client';
 
 type TransactionWithBankAccount = Transaction & { bankAccount?: BankAccount };
 

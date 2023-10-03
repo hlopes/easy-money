@@ -1,5 +1,7 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./client"
+  binaryTargets = "linux-musl-openssl-3.0.x"
 }
 
 datasource db {
@@ -46,8 +48,8 @@ model Transaction {
   updatedAt DateTime @updatedAt
 
   bankAccountId String
-  bankAccount BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
 
   categoryId String
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }

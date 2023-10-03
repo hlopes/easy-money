@@ -4,12 +4,6 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { Category } from '@prisma/client';
-import {
-  type BankAccount,
-  type Transaction,
-  TransactionType,
-} from '@prisma/client';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { CalendarIcon } from '@radix-ui/react-icons';
 
@@ -47,6 +41,12 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import type { Category } from '@/prisma/client';
+import {
+  type BankAccount,
+  type Transaction,
+  TransactionType,
+} from '@/prisma/client';
 
 import type { TransactionFormData } from './schema';
 import schema from './schema';

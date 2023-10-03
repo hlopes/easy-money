@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
-import { TransactionType } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
+import { TransactionType } from '@/prisma/client';
 
 import type { TotalSeries } from '../types';
 

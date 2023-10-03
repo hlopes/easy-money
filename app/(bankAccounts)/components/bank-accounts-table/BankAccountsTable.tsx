@@ -1,7 +1,7 @@
-import type { BankAccount } from '@prisma/client';
 import type { ColumnDef } from '@tanstack/react-table';
 
 import { DataTable } from '@/components/ui/data-table';
+import type { BankAccount } from '@/prisma/client';
 
 interface BankAccountsTableProps {
   columns: ColumnDef<BankAccount>[];
