@@ -1,3 +1,5 @@
+import { useAuth } from '@clerk/nextjs';
+
 import {
   createTransaction as createTransactionAction,
   deleteTransaction as deleteTransactionAction,
@@ -13,6 +15,8 @@ import useOptimisticTransactions from './useOptimisticTransactions';
 export default function useTransactions(
   initialTransactions: TransactionWithCategory[]
 ) {
+  const { userId } = useAuth();
+
   const { toast } = useToast();
 
   const {
@@ -25,7 +29,11 @@ export default function useTransactions(
   const createTransaction = async (data: TransactionFormData) => {
     const transactionToAdd = { ...data, notes: data.notes ?? null };
 
-    await createTransactionAction(transactionToAdd);
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
+    await createTransactionAction({ ...transactionToAdd, userId });
 
     optimisticAddTransaction(transactionToAdd);
   };
@@ -33,7 +41,11 @@ export default function useTransactions(
   const updateTransaction = async (id: string, data: TransactionFormData) => {
     const transactionToUpdate = { ...data, id, notes: data.notes ?? null };
 
-    await updateTransactionAction(transactionToUpdate);
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
+    await updateTransactionAction({ ...transactionToUpdate, userId });
 
     optimisticUpdateTransaction(transactionToUpdate);
   };

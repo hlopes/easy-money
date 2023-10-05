@@ -56,7 +56,7 @@ export default function TransactionsManager({
 
   return (
     <>
-      <PageTop title="Transactions 234">
+      <PageTop title="Transactions">
         <ButtonAdd onClick={handleOpenDialog} />
       </PageTop>
       <div className="overflow-x-auto my-2">

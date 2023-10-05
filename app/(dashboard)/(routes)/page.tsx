@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { currentUser } from '@clerk/nextjs';
 
 import getTotalBankAccounts from '@/app/(bankAccounts)/actions/getTotalBankAccounts';
 import getTotalByTransactionType from '@/app/(transactions)/actions/getTotalByTransactionType';
@@ -10,13 +11,15 @@ import { TransactionType } from '@/prisma/client';
 import { OverviewCards, YearChart } from '../components';
 
 export default async function Dashboard() {
-  const totalAccounts = await getTotalBankAccounts();
+  const user = await currentUser();
+
+  const totalAccounts = await getTotalBankAccounts(user?.id);
 
   const { totalCurrentMonth: totalExpenses, delta: expensesDelta } =
-    await getTotalByTransactionType(TransactionType.EXPENSE);
+    await getTotalByTransactionType(TransactionType.EXPENSE, user?.id);
 
   const { totalCurrentMonth: totalIncomes, delta: incomesDelta } =
-    await getTotalByTransactionType(TransactionType.INCOME);
+    await getTotalByTransactionType(TransactionType.INCOME, user?.id);
 
   const totalsByMonth = await getTransactionTotalsByMonth();
 

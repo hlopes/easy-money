@@ -114,7 +114,8 @@ exports.Prisma.BankAccountScalarFieldEnum = {
   balance: 'balance',
   notes: 'notes',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -132,6 +133,7 @@ exports.Prisma.TransactionScalarFieldEnum = {
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  userId: 'userId',
   bankAccountId: 'bankAccountId',
   categoryId: 'categoryId'
 };

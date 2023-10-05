@@ -1,3 +1,5 @@
+import { useAuth } from '@clerk/nextjs';
+
 import {
   createBankAccount as createBankAccountAction,
   deleteBankAccount as deleteBankAccountAction,
@@ -10,6 +12,8 @@ import type { BankAccount } from '@/prisma/client';
 import useOptimisticBankAccounts from './useOptimisticBankAccounts';
 
 export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
+  const { userId } = useAuth();
+
   const { toast } = useToast();
 
   const {
@@ -22,7 +26,11 @@ export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
   const createBankAccount = async (data: BankAccountFormData) => {
     const bankAccountToAdd = { ...data, notes: data.notes ?? null };
 
-    await createBankAccountAction(bankAccountToAdd);
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
+    await createBankAccountAction({ ...bankAccountToAdd, userId });
 
     optimisticAddBankAccount(bankAccountToAdd);
   };
@@ -30,7 +38,11 @@ export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
   const updateBankAccount = async (id: string, data: BankAccountFormData) => {
     const bankAccountToUpdate = { ...data, id, notes: data.notes ?? null };
 
-    await updateBankAccountAction(bankAccountToUpdate);
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
+    await updateBankAccountAction({ ...bankAccountToUpdate, userId });
 
     optimisticUpdateBankAccount(bankAccountToUpdate);
   };

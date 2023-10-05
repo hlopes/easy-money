@@ -1,11 +1,9 @@
 import type { PropsWithChildren } from 'react';
 import { Poppins } from 'next/font/google';
-import { getServerSession } from 'next-auth';
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 
-import SessionProvider from '@/components/providers/SessionProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
-import SideNav from '@/components/SideNav';
-import { Toaster } from '@/components/ui/toaster';
 
 import './globals.css';
 
@@ -17,20 +15,18 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-  const session = await getServerSession();
-
   return (
-    <html lang="en">
-      <body className={font.className}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <SessionProvider session={session}>
-            <SideNav>
-              <main className="container mt-2 px-4 max-w-4xl">{children}</main>
-              <Toaster />
-            </SideNav>
-          </SessionProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}>
+      <html lang="en">
+        <body className={font.className}>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

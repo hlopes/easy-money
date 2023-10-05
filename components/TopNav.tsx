@@ -1,8 +1,8 @@
 import { LuMenu } from 'react-icons/lu';
+import { UserButton } from '@clerk/nextjs';
 
 import { Button } from './ui/button';
 import ModeToggle from './ModeToggle';
-import UserNav from './UserNav';
 
 interface TopNavProps {
   onOpen(): void;
@@ -21,7 +21,7 @@ export default function TopNav({ onOpen }: TopNavProps) {
         </Button>
         <div className="flex items-center space-x-2 w-full justify-end">
           <ModeToggle />
-          <UserNav />
+          <UserButton afterSignOutUrl="/" />
         </div>
       </div>
     </div>

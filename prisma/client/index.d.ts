@@ -1136,6 +1136,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type BankAccountMaxAggregateOutputType = {
@@ -1146,6 +1147,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type BankAccountCountAggregateOutputType = {
@@ -1156,6 +1158,7 @@ export namespace Prisma {
     notes: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -1176,6 +1179,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type BankAccountMaxAggregateInputType = {
@@ -1186,6 +1190,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type BankAccountCountAggregateInputType = {
@@ -1196,6 +1201,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -1293,6 +1299,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string
     _count: BankAccountCountAggregateOutputType | null
     _avg: BankAccountAvgAggregateOutputType | null
     _sum: BankAccountSumAggregateOutputType | null
@@ -1322,6 +1329,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     transaction?: boolean | BankAccount$transactionArgs<ExtArgs>
     _count?: boolean | BankAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankAccount"]>
@@ -1334,6 +1342,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
   export type BankAccountInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -1355,6 +1364,7 @@ export namespace Prisma {
       notes: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string
     }, ExtArgs["result"]["bankAccount"]>
     composites: {}
   }
@@ -1757,6 +1767,7 @@ export namespace Prisma {
     readonly notes: FieldRef<"BankAccount", 'String'>
     readonly createdAt: FieldRef<"BankAccount", 'DateTime'>
     readonly updatedAt: FieldRef<"BankAccount", 'DateTime'>
+    readonly userId: FieldRef<"BankAccount", 'String'>
   }
     
 
@@ -3063,6 +3074,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
     bankAccountId: string | null
     categoryId: string | null
   }
@@ -3075,6 +3087,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
     bankAccountId: string | null
     categoryId: string | null
   }
@@ -3087,6 +3100,7 @@ export namespace Prisma {
     notes: number
     createdAt: number
     updatedAt: number
+    userId: number
     bankAccountId: number
     categoryId: number
     _all: number
@@ -3109,6 +3123,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     bankAccountId?: true
     categoryId?: true
   }
@@ -3121,6 +3136,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     bankAccountId?: true
     categoryId?: true
   }
@@ -3133,6 +3149,7 @@ export namespace Prisma {
     notes?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     bankAccountId?: true
     categoryId?: true
     _all?: true
@@ -3232,6 +3249,7 @@ export namespace Prisma {
     notes: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string
     bankAccountId: string
     categoryId: string
     _count: TransactionCountAggregateOutputType | null
@@ -3263,6 +3281,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     bankAccountId?: boolean
     categoryId?: boolean
     bankAccount?: boolean | BankAccountDefaultArgs<ExtArgs>
@@ -3277,6 +3296,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     bankAccountId?: boolean
     categoryId?: boolean
   }
@@ -3301,6 +3321,7 @@ export namespace Prisma {
       notes: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string
       bankAccountId: string
       categoryId: string
     }, ExtArgs["result"]["transaction"]>
@@ -3707,6 +3728,7 @@ export namespace Prisma {
     readonly notes: FieldRef<"Transaction", 'String'>
     readonly createdAt: FieldRef<"Transaction", 'DateTime'>
     readonly updatedAt: FieldRef<"Transaction", 'DateTime'>
+    readonly userId: FieldRef<"Transaction", 'String'>
     readonly bankAccountId: FieldRef<"Transaction", 'String'>
     readonly categoryId: FieldRef<"Transaction", 'String'>
   }
@@ -4057,7 +4079,8 @@ export namespace Prisma {
     balance: 'balance',
     notes: 'notes',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
@@ -4081,6 +4104,7 @@ export namespace Prisma {
     notes: 'notes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    userId: 'userId',
     bankAccountId: 'bankAccountId',
     categoryId: 'categoryId'
   };
@@ -4201,6 +4225,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"BankAccount"> | string | null
     createdAt?: DateTimeFilter<"BankAccount"> | Date | string
     updatedAt?: DateTimeFilter<"BankAccount"> | Date | string
+    userId?: StringFilter<"BankAccount"> | string
     transaction?: TransactionListRelationFilter
   }
 
@@ -4212,6 +4237,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     transaction?: TransactionOrderByRelationAggregateInput
   }
 
@@ -4226,6 +4252,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"BankAccount"> | string | null
     createdAt?: DateTimeFilter<"BankAccount"> | Date | string
     updatedAt?: DateTimeFilter<"BankAccount"> | Date | string
+    userId?: StringFilter<"BankAccount"> | string
     transaction?: TransactionListRelationFilter
   }, "id">
 
@@ -4237,6 +4264,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     _count?: BankAccountCountOrderByAggregateInput
     _avg?: BankAccountAvgOrderByAggregateInput
     _max?: BankAccountMaxOrderByAggregateInput
@@ -4255,6 +4283,7 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
+    userId?: StringWithAggregatesFilter<"BankAccount"> | string
   }
 
   export type CategoryWhereInput = {
@@ -4318,6 +4347,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Transaction"> | string | null
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
+    userId?: StringFilter<"Transaction"> | string
     bankAccountId?: StringFilter<"Transaction"> | string
     categoryId?: StringFilter<"Transaction"> | string
     bankAccount?: XOR<BankAccountRelationFilter, BankAccountWhereInput>
@@ -4332,6 +4362,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     bankAccountId?: SortOrder
     categoryId?: SortOrder
     bankAccount?: BankAccountOrderByWithRelationInput
@@ -4349,6 +4380,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Transaction"> | string | null
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
+    userId?: StringFilter<"Transaction"> | string
     bankAccountId?: StringFilter<"Transaction"> | string
     categoryId?: StringFilter<"Transaction"> | string
     bankAccount?: XOR<BankAccountRelationFilter, BankAccountWhereInput>
@@ -4363,6 +4395,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     bankAccountId?: SortOrder
     categoryId?: SortOrder
     _count?: TransactionCountOrderByAggregateInput
@@ -4383,6 +4416,7 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"Transaction"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Transaction"> | Date | string
+    userId?: StringWithAggregatesFilter<"Transaction"> | string
     bankAccountId?: StringWithAggregatesFilter<"Transaction"> | string
     categoryId?: StringWithAggregatesFilter<"Transaction"> | string
   }
@@ -4395,6 +4429,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     transaction?: TransactionCreateNestedManyWithoutBankAccountInput
   }
 
@@ -4406,6 +4441,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     transaction?: TransactionUncheckedCreateNestedManyWithoutBankAccountInput
   }
 
@@ -4417,6 +4453,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     transaction?: TransactionUpdateManyWithoutBankAccountNestedInput
   }
 
@@ -4428,6 +4465,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     transaction?: TransactionUncheckedUpdateManyWithoutBankAccountNestedInput
   }
 
@@ -4439,6 +4477,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type BankAccountUpdateManyMutationInput = {
@@ -4449,6 +4488,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type BankAccountUncheckedUpdateManyInput = {
@@ -4459,6 +4499,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryCreateInput = {
@@ -4522,6 +4563,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccount: BankAccountCreateNestedOneWithoutTransactionInput
     category: CategoryCreateNestedOneWithoutTransactionsInput
   }
@@ -4534,6 +4576,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccountId: string
     categoryId: string
   }
@@ -4546,6 +4589,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccount?: BankAccountUpdateOneRequiredWithoutTransactionNestedInput
     category?: CategoryUpdateOneRequiredWithoutTransactionsNestedInput
   }
@@ -4558,6 +4602,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccountId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
   }
@@ -4570,6 +4615,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccountId: string
     categoryId: string
   }
@@ -4582,6 +4628,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransactionUncheckedUpdateManyInput = {
@@ -4592,6 +4639,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccountId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
   }
@@ -4671,6 +4719,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type BankAccountAvgOrderByAggregateInput = {
@@ -4685,6 +4734,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type BankAccountMinOrderByAggregateInput = {
@@ -4695,6 +4745,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type BankAccountSumOrderByAggregateInput = {
@@ -4813,6 +4864,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     bankAccountId?: SortOrder
     categoryId?: SortOrder
   }
@@ -4829,6 +4881,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     bankAccountId?: SortOrder
     categoryId?: SortOrder
   }
@@ -4841,6 +4894,7 @@ export namespace Prisma {
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
     bankAccountId?: SortOrder
     categoryId?: SortOrder
   }
@@ -5156,6 +5210,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     category: CategoryCreateNestedOneWithoutTransactionsInput
   }
 
@@ -5167,6 +5222,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     categoryId: string
   }
 
@@ -5207,6 +5263,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Transaction"> | string | null
     createdAt?: DateTimeFilter<"Transaction"> | Date | string
     updatedAt?: DateTimeFilter<"Transaction"> | Date | string
+    userId?: StringFilter<"Transaction"> | string
     bankAccountId?: StringFilter<"Transaction"> | string
     categoryId?: StringFilter<"Transaction"> | string
   }
@@ -5219,6 +5276,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccount: BankAccountCreateNestedOneWithoutTransactionInput
   }
 
@@ -5230,6 +5288,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccountId: string
   }
 
@@ -5267,6 +5326,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type BankAccountUncheckedCreateWithoutTransactionInput = {
@@ -5277,6 +5337,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
   export type BankAccountCreateOrConnectWithoutTransactionInput = {
@@ -5322,6 +5383,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type BankAccountUncheckedUpdateWithoutTransactionInput = {
@@ -5332,6 +5394,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryUpsertWithoutTransactionsInput = {
@@ -5367,6 +5430,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     categoryId: string
   }
 
@@ -5378,6 +5442,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     category?: CategoryUpdateOneRequiredWithoutTransactionsNestedInput
   }
 
@@ -5389,6 +5454,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5400,6 +5466,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5411,6 +5478,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     bankAccountId: string
   }
 
@@ -5422,6 +5490,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccount?: BankAccountUpdateOneRequiredWithoutTransactionNestedInput
   }
 
@@ -5433,6 +5502,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5444,6 +5514,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     bankAccountId?: StringFieldUpdateOperationsInput | string
   }
 
