@@ -30,9 +30,11 @@ export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
       throw new Error('User not found');
     }
 
-    await createBankAccountAction({ ...bankAccountToAdd, userId });
+    const bankAccountWithUserId = { ...bankAccountToAdd, userId };
 
-    optimisticAddBankAccount(bankAccountToAdd);
+    await createBankAccountAction(bankAccountWithUserId);
+
+    optimisticAddBankAccount(bankAccountWithUserId);
   };
 
   const updateBankAccount = async (id: string, data: BankAccountFormData) => {
@@ -42,9 +44,11 @@ export default function useBankAccounts(initialBankAccounts: BankAccount[]) {
       throw new Error('User not found');
     }
 
-    await updateBankAccountAction({ ...bankAccountToUpdate, userId });
+    const bankAccountWithUserId = { ...bankAccountToUpdate, userId };
 
-    optimisticUpdateBankAccount(bankAccountToUpdate);
+    await updateBankAccountAction(bankAccountWithUserId);
+
+    optimisticUpdateBankAccount(bankAccountWithUserId);
   };
 
   const deleteBankAccount = async (id: string) => {

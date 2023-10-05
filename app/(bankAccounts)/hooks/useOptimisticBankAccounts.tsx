@@ -11,11 +11,14 @@ enum ActionTypes {
   DELETE = 'delete',
 }
 
-type AddBankAccount = Pick<BankAccount, 'name' | 'balance' | 'date' | 'notes'>;
+type AddBankAccount = Pick<
+  BankAccount,
+  'name' | 'balance' | 'date' | 'notes' | 'userId'
+>;
 
 type UpdateBankAccount = Pick<
   BankAccount,
-  'id' | 'name' | 'balance' | 'date' | 'notes'
+  'id' | 'name' | 'balance' | 'date' | 'notes' | 'userId'
 >;
 
 type BankAccountAction = {

@@ -15,12 +15,25 @@ enum ActionTypes {
 
 type AddTransaction = Pick<
   TransactionWithCategory,
-  'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
+  | 'date'
+  | 'value'
+  | 'type'
+  | 'notes'
+  | 'bankAccountId'
+  | 'categoryId'
+  | 'userId'
 >;
 
 type UpdateTransaction = Pick<
   TransactionWithCategory,
-  'id' | 'date' | 'value' | 'type' | 'notes' | 'bankAccountId' | 'categoryId'
+  | 'id'
+  | 'date'
+  | 'value'
+  | 'type'
+  | 'notes'
+  | 'bankAccountId'
+  | 'categoryId'
+  | 'userId'
 >;
 
 type TransactionAction = {

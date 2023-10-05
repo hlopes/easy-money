@@ -33,9 +33,11 @@ export default function useTransactions(
       throw new Error('User not found');
     }
 
-    await createTransactionAction({ ...transactionToAdd, userId });
+    const transactionWithUserId = { ...transactionToAdd, userId };
 
-    optimisticAddTransaction(transactionToAdd);
+    await createTransactionAction(transactionWithUserId);
+
+    optimisticAddTransaction(transactionWithUserId);
   };
 
   const updateTransaction = async (id: string, data: TransactionFormData) => {
@@ -45,9 +47,11 @@ export default function useTransactions(
       throw new Error('User not found');
     }
 
-    await updateTransactionAction({ ...transactionToUpdate, userId });
+    const transactionWithUserId = { ...transactionToUpdate, userId };
 
-    optimisticUpdateTransaction(transactionToUpdate);
+    await updateTransactionAction(transactionWithUserId);
+
+    optimisticUpdateTransaction(transactionWithUserId);
   };
 
   const deleteTransaction = async (id: string) => {
