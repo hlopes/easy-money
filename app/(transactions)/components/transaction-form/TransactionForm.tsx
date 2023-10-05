@@ -298,7 +298,7 @@ export default function TransactionForm({
           )}
         />
         <div className="flex justify-end">
-          <Button>Save</Button>
+          <Button disabled={form.formState.isSubmitting}>Save</Button>
         </div>
       </form>
     </Form>
