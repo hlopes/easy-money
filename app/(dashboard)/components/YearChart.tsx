@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  Bar,
-  BarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import type { TotalSeries } from '@/app/(transactions)/types';
 
@@ -33,7 +26,7 @@ export default function YearChart({ data }: YearChartProps) {
           axisLine={false}
           tickFormatter={(value: number) => `${value}€`}
         />
-        <Tooltip formatter={(value) => `${value}€`} />
+        {/* <Tooltip formatter={(value) => `${value}€`} /> */}
         <Bar
           dataKey="totalIncomes"
           fill="rgba(22,163,74, 0.7)"
