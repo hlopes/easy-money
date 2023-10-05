@@ -31,11 +31,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.3.1
- * Query Engine version: 61e140623197a131c2a6189271ffee05a7aa9a59
+ * Query Engine version: 2f302df92bd8945e20ad4595a73def5b96afa54f
  */
 Prisma.prismaVersion = {
   client: "5.3.1",
-  engine: "61e140623197a131c2a6189271ffee05a7aa9a59"
+  engine: "2f302df92bd8945e20ad4595a73def5b96afa54f"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -165,6 +165,10 @@ const config = {
       {
         "fromEnvVar": null,
         "value": "rhel-openssl-1.0.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-1.1.x"
       }
     ],
     "previewFeatures": [],
@@ -176,7 +180,7 @@ const config = {
   },
   "relativePath": "..",
   "clientVersion": "5.3.1",
-  "engineVersion": "61e140623197a131c2a6189271ffee05a7aa9a59",
+  "engineVersion": "2f302df92bd8945e20ad4595a73def5b96afa54f",
   "datasourceNames": [
     "db"
   ],
@@ -190,8 +194,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCAgID0gIi4vY2xpZW50Ig0KICBiaW5hcnlUYXJnZXRzID0gWyJsaW51eC1tdXNsLW9wZW5zc2wtMy4wLngiLCAicmhlbC1vcGVuc3NsLTEuMC54Il0NCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyID0gInBvc3RncmVzcWwiDQogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQ0KfQ0KDQptb2RlbCBCYW5rQWNjb3VudCB7DQogIGlkICAgICAgU3RyaW5nICAgQGlkIEBkZWZhdWx0KHV1aWQoKSkNCiAgbmFtZSAgICBTdHJpbmcgICBAZGIuVGV4dA0KICBkYXRlICAgIERhdGVUaW1lDQogIGJhbGFuY2UgRmxvYXQgICAgQGRlZmF1bHQoMCkNCiAgbm90ZXMgICBTdHJpbmc/ICBAZGIuVGV4dA0KDQogIGNyZWF0ZWRBdCBEYXRlVGltZSBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lIEB1cGRhdGVkQXQNCg0KICB0cmFuc2FjdGlvbiBUcmFuc2FjdGlvbltdDQp9DQoNCmVudW0gVHJhbnNhY3Rpb25UeXBlIHsNCiAgSU5DT01FDQogIEVYUEVOU0UNCn0NCg0KbW9kZWwgQ2F0ZWdvcnkgew0KICBpZCAgIFN0cmluZyBAaWQgQGRlZmF1bHQodXVpZCgpKQ0KICBuYW1lIFN0cmluZyBAZGIuVmFyQ2hhcig1MDApDQoNCiAgY3JlYXRlZEF0IERhdGVUaW1lIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkQXQgRGF0ZVRpbWUgQHVwZGF0ZWRBdA0KDQogIHRyYW5zYWN0aW9ucyBUcmFuc2FjdGlvbltdDQp9DQoNCm1vZGVsIFRyYW5zYWN0aW9uIHsNCiAgaWQgICAgU3RyaW5nICAgICAgICAgIEBpZCBAZGVmYXVsdCh1dWlkKCkpDQogIGRhdGUgIERhdGVUaW1lDQogIHZhbHVlIEZsb2F0ICAgICAgICAgICBAZGVmYXVsdCgwKQ0KICB0eXBlICBUcmFuc2FjdGlvblR5cGUgQGRlZmF1bHQoSU5DT01FKQ0KICBub3RlcyBTdHJpbmc/ICAgICAgICAgQGRiLlZhckNoYXIoNTAwKQ0KDQogIGNyZWF0ZWRBdCBEYXRlVGltZSBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lIEB1cGRhdGVkQXQNCg0KICBiYW5rQWNjb3VudElkIFN0cmluZw0KICBiYW5rQWNjb3VudCAgIEJhbmtBY2NvdW50IEByZWxhdGlvbihmaWVsZHM6IFtiYW5rQWNjb3VudElkXSwgcmVmZXJlbmNlczogW2lkXSwgb25EZWxldGU6IENhc2NhZGUpDQoNCiAgY2F0ZWdvcnlJZCBTdHJpbmcNCiAgY2F0ZWdvcnkgICBDYXRlZ29yeSBAcmVsYXRpb24oZmllbGRzOiBbY2F0ZWdvcnlJZF0sIHJlZmVyZW5jZXM6IFtpZF0sIG9uRGVsZXRlOiBDYXNjYWRlKQ0KfQ0K",
-  "inlineSchemaHash": "e969ac1aec7bf9df7a573eb07162cabdae5b031d53308764575774e9e457cefc",
+  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCAgID0gIi4vY2xpZW50Ig0KICBiaW5hcnlUYXJnZXRzID0gWyJsaW51eC1tdXNsLW9wZW5zc2wtMy4wLngiLCAicmhlbC1vcGVuc3NsLTEuMC54IiwgImRlYmlhbi1vcGVuc3NsLTEuMS54Il0NCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyID0gInBvc3RncmVzcWwiDQogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQ0KfQ0KDQptb2RlbCBCYW5rQWNjb3VudCB7DQogIGlkICAgICAgU3RyaW5nICAgQGlkIEBkZWZhdWx0KHV1aWQoKSkNCiAgbmFtZSAgICBTdHJpbmcgICBAZGIuVGV4dA0KICBkYXRlICAgIERhdGVUaW1lDQogIGJhbGFuY2UgRmxvYXQgICAgQGRlZmF1bHQoMCkNCiAgbm90ZXMgICBTdHJpbmc/ICBAZGIuVGV4dA0KDQogIGNyZWF0ZWRBdCBEYXRlVGltZSBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lIEB1cGRhdGVkQXQNCg0KICB0cmFuc2FjdGlvbiBUcmFuc2FjdGlvbltdDQp9DQoNCmVudW0gVHJhbnNhY3Rpb25UeXBlIHsNCiAgSU5DT01FDQogIEVYUEVOU0UNCn0NCg0KbW9kZWwgQ2F0ZWdvcnkgew0KICBpZCAgIFN0cmluZyBAaWQgQGRlZmF1bHQodXVpZCgpKQ0KICBuYW1lIFN0cmluZyBAZGIuVmFyQ2hhcig1MDApDQoNCiAgY3JlYXRlZEF0IERhdGVUaW1lIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkQXQgRGF0ZVRpbWUgQHVwZGF0ZWRBdA0KDQogIHRyYW5zYWN0aW9ucyBUcmFuc2FjdGlvbltdDQp9DQoNCm1vZGVsIFRyYW5zYWN0aW9uIHsNCiAgaWQgICAgU3RyaW5nICAgICAgICAgIEBpZCBAZGVmYXVsdCh1dWlkKCkpDQogIGRhdGUgIERhdGVUaW1lDQogIHZhbHVlIEZsb2F0ICAgICAgICAgICBAZGVmYXVsdCgwKQ0KICB0eXBlICBUcmFuc2FjdGlvblR5cGUgQGRlZmF1bHQoSU5DT01FKQ0KICBub3RlcyBTdHJpbmc/ICAgICAgICAgQGRiLlZhckNoYXIoNTAwKQ0KDQogIGNyZWF0ZWRBdCBEYXRlVGltZSBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lIEB1cGRhdGVkQXQNCg0KICBiYW5rQWNjb3VudElkIFN0cmluZw0KICBiYW5rQWNjb3VudCAgIEJhbmtBY2NvdW50IEByZWxhdGlvbihmaWVsZHM6IFtiYW5rQWNjb3VudElkXSwgcmVmZXJlbmNlczogW2lkXSwgb25EZWxldGU6IENhc2NhZGUpDQoNCiAgY2F0ZWdvcnlJZCBTdHJpbmcNCiAgY2F0ZWdvcnkgICBDYXRlZ29yeSBAcmVsYXRpb24oZmllbGRzOiBbY2F0ZWdvcnlJZF0sIHJlZmVyZW5jZXM6IFtpZF0sIG9uRGVsZXRlOiBDYXNjYWRlKQ0KfQ0K",
+  "inlineSchemaHash": "479fd77e9b66fcce95c6b1b78bfacc45a9ba5caa4842ed8bad999153e2bdedff",
   "noEngine": false
 }
 
@@ -235,6 +239,10 @@ path.join(process.cwd(), "prisma/client/libquery_engine-linux-musl-openssl-3.0.x
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-rhel-openssl-1.0.x.so.node");
 path.join(process.cwd(), "prisma/client/libquery_engine-rhel-openssl-1.0.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
+path.join(process.cwd(), "prisma/client/libquery_engine-debian-openssl-1.1.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/client/schema.prisma")
