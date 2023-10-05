@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { Poppins } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
 
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 
@@ -16,10 +15,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}>
+    <ClerkProvider>
       <html lang="en">
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system">
