@@ -151,7 +151,7 @@ export default function BankAccountForm({
           )}
         />
         <div className="flex justify-end">
-          <Button disabled={form.formState.isSubmitting}>Save</Button>
+          <Button aria-disabled={form.formState.isSubmitting}>Save</Button>
         </div>
       </form>
     </Form>
