@@ -1,9 +1,12 @@
 'use client';
 
+import { LuActivity, LuBriefcase, LuLayoutDashboard } from 'react-icons/lu';
 import Link from 'next/link';
 
 import { useSideNav } from '@/hooks';
 import { cn } from '@/lib/utils';
+
+import SideNavLink from './SideNavLink';
 
 export default function SideNav() {
   const { isOpen, close } = useSideNav();
@@ -21,15 +24,17 @@ export default function SideNav() {
         </div>
         <nav>
           <ul>
-            <li className="ml-6 mb-2" onClick={close}>
-              <Link href="/">Dashboard</Link>
-            </li>
-            <li className="ml-6 mb-2" onClick={close}>
-              <Link href="/bank-accounts">BankAccounts</Link>
-            </li>
-            <li className="ml-6 mb-2" onClick={close}>
-              <Link href="/transactions">Transactions</Link>
-            </li>
+            <SideNavLink Icon={LuLayoutDashboard} url="/" name="Dashboard" />
+            <SideNavLink
+              Icon={LuBriefcase}
+              url="/bank-accounts"
+              name="Bank Accounts"
+            />
+            <SideNavLink
+              Icon={LuActivity}
+              url="/transaction"
+              name="Transactions"
+            />
           </ul>
         </nav>
       </div>
