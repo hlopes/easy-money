@@ -5,9 +5,9 @@ import { TransactionType } from '@/prisma/client';
 
 import type { TotalSeries } from '../types';
 
-export default async function getTransactionTotalsByMonth(): Promise<
-  TotalSeries[]
-> {
+export default async function getTransactionTotalsByMonth(
+  userId?: string
+): Promise<TotalSeries[]> {
   try {
     const records = await prisma.transaction.findMany({
       select: {
@@ -18,6 +18,9 @@ export default async function getTransactionTotalsByMonth(): Promise<
       },
       orderBy: {
         date: 'asc',
+      },
+      where: {
+        userId,
       },
     });
 

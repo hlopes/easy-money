@@ -25,7 +25,7 @@ export default async function Dashboard() {
   const { totalCurrentMonth: totalIncomes, delta: incomesDelta } =
     await getTotalByTransactionType(TransactionType.INCOME, user?.id);
 
-  const totalsByMonth = await getTransactionTotalsByMonth();
+  const totalsByMonth = await getTransactionTotalsByMonth(user?.id);
 
   const totalIncomesByCategoryAndYear = await getTotalByCategoryYear(
     TransactionType.INCOME,
@@ -36,6 +36,8 @@ export default async function Dashboard() {
     TransactionType.EXPENSE,
     user?.id
   );
+
+  console.log('### totalsByMonth', totalsByMonth.length);
 
   return (
     <>
@@ -52,31 +54,37 @@ export default async function Dashboard() {
       </div>
       <h2 className="mb-4 text-center">{format(new Date(), 'y')}</h2>
       <div className="grid gap-4 mb-4 sm:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Incomes</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <CategoriesChart data={totalIncomesByCategoryAndYear} />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Expenses</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <CategoriesChart data={totalExpensesByCategoryAndYear} />
-          </CardContent>
-        </Card>
+        {!totalIncomesByCategoryAndYear.length ? null : (
+          <Card>
+            <CardHeader>
+              <CardTitle>Incomes</CardTitle>
+            </CardHeader>
+            <CardContent className="pl-2">
+              <CategoriesChart data={totalIncomesByCategoryAndYear} />
+            </CardContent>
+          </Card>
+        )}
+        {!totalExpensesByCategoryAndYear.length ? null : (
+          <Card>
+            <CardHeader>
+              <CardTitle>Expenses</CardTitle>
+            </CardHeader>
+            <CardContent className="pl-2">
+              <CategoriesChart data={totalExpensesByCategoryAndYear} />
+            </CardContent>
+          </Card>
+        )}
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>By month</CardTitle>
-        </CardHeader>
-        <CardContent className="pl-2">
-          <YearChart data={totalsByMonth} />
-        </CardContent>
-      </Card>
+      {!totalsByMonth.length ? null : (
+        <Card>
+          <CardHeader>
+            <CardTitle>By month</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <YearChart data={totalsByMonth} />
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 }
