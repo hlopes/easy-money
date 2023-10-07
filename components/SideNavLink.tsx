@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useSideNav } from '@/hooks';
 import { cn } from '@/lib/utils';
 
 type SideNavLinkProps = {
@@ -12,6 +13,8 @@ type SideNavLinkProps = {
 
 export default function SideNavLink({ Icon, url, name }: SideNavLinkProps) {
   const pathname = usePathname();
+
+  const { close } = useSideNav();
 
   const isActive = pathname === url;
 
