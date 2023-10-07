@@ -4,11 +4,11 @@ A boilerplate for NextJS 13.5+ applications.
 
 ## Introduction
 
-The goal here is to serve as a collection of basic resources when developing NextJs applications with the latest features. It is supposed to address the most common requirements of the real-world problems of an application.
+The goal here is to serve as a collection of basic resources that can be used when developing NextJs applications with the latest features. It is supposed to address the most common requirements of the real-world problems of an application.
 
 #### Disclaimer:
 
-This is an opinionated guide that shows how I prefer to do some things in a certain way. You should never take as it a recipe, instead decides what works best for you and your team.
+This is an opinionated guide that shows how I prefer to do some things in a certain way. So always decide what works best for you and your team.
 
 ## Table Of Contents:
 
@@ -17,7 +17,7 @@ This is an opinionated guide that shows how I prefer to do some things in a cert
 - [✨ Code Style](docs/code-style.md)
 - [📁 Project Structure](https://nextjs.org/docs/getting-started/project-structure)
 - [🌈 Components And Styling](docs/components-and-styling.md)
-- [🔒 Authentication and Security](https://clerk.com/)
+- [🔒 Authentication](https://clerk.com/)
 - [🤖 TODO: Testing]
 - [⚠️ TODO: Error Handling]
 - [🚀 Performance](https://nextjs.org/docs/app/building-your-application/optimizing)

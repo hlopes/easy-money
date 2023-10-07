@@ -1,6 +1,6 @@
 # 📡 Overview
 
-The application is simple. Users add bank accounts and transactions (incomes or expenses). With that information the users can have an overview of all incomes and expenses in the dashboard.
+The application is simple. Users can add bank accounts and transactions (incomes or expenses). With that information the users can have an overview of all incomes and expenses in the dashboard.
 
 [Vercel Demo](https://easy-money-git-main-hlopes.vercel.app/)
 
@@ -41,10 +41,6 @@ pnpm install
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 

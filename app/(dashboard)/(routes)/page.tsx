@@ -1,14 +1,18 @@
 import { format } from 'date-fns';
 import { currentUser } from '@clerk/nextjs';
 
-import getTotalBankAccounts from '@/app/(bankAccounts)/actions/getTotalBankAccounts';
-import getTotalByTransactionType from '@/app/(transactions)/actions/getTotalByTransactionType';
-import getTransactionTotalsByMonth from '@/app/(transactions)/actions/getTransactionTotalsByMonth';
+import { getTotalBankAccounts } from '@/app/(bankAccounts)/actions';
+import {
+  getTotalByCategoryYear,
+  getTotalByTransactionType,
+  getTransactionTotalsByMonth,
+} from '@/app/(transactions)/actions';
 import PageTop from '@/components/PageTop';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TransactionType } from '@/prisma/client';
 
 import { OverviewCards, YearChart } from '../components';
+import CategoriesChart from '../components/CategoriesChart';
 
 export default async function Dashboard() {
   const user = await currentUser();
@@ -23,6 +27,16 @@ export default async function Dashboard() {
 
   const totalsByMonth = await getTransactionTotalsByMonth();
 
+  const totalIncomesByCategoryAndYear = await getTotalByCategoryYear(
+    TransactionType.INCOME,
+    user?.id
+  );
+
+  const totalExpensesByCategoryAndYear = await getTotalByCategoryYear(
+    TransactionType.EXPENSE,
+    user?.id
+  );
+
   return (
     <>
       <PageTop title="Dashboard" />
@@ -36,7 +50,25 @@ export default async function Dashboard() {
           expensesDelta={expensesDelta}
         />
       </div>
-      <Card className="col-span-4">
+      <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 mb-4">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Incomes</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <CategoriesChart data={totalIncomesByCategoryAndYear} />
+          </CardContent>
+        </Card>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Expenses</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <CategoriesChart data={totalExpensesByCategoryAndYear} />
+          </CardContent>
+        </Card>
+      </div>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>{format(new Date(), 'y')}</CardTitle>
         </CardHeader>

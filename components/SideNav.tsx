@@ -16,7 +16,7 @@ export default function SideNav({ children }: PropsWithChildren) {
       {/* Navigation */}
       <div
         className={cn(
-          'fixed inset-y-0 left-0 w-full h-screen bg-white dark:bg-background shadow-md transform transition-transform duration-300 ease-in-out z-10 lg:static border-r-2 mt-[65px] lg:mt-0 md:w-64',
+          'fixed inset-y-0 left-0 w-full h-full bg-white dark:bg-background shadow-md transform transition-transform duration-300 ease-in-out z-10 lg:static border-r-2 mt-[65px] lg:mt-0 md:w-64',
           !isOpen && '-translate-x-full lg:-translate-x-0'
         )}>
         <div className="p-4 prose text-lg">

@@ -39,7 +39,8 @@ export default function OverviewCards({
           </div>
           {!Number.isNaN(incomesDelta) ? (
             <p className="text-xs text-muted-foreground">
-              {incomesDelta.toFixed()}% from last month
+              {Number.isFinite(incomesDelta) ? incomesDelta.toFixed() : 100}%
+              from last month
             </p>
           ) : null}
         </CardContent>
@@ -55,7 +56,8 @@ export default function OverviewCards({
           </div>
           {!Number.isNaN(expensesDelta) ? (
             <p className="text-xs text-muted-foreground">
-              {expensesDelta.toFixed()} % from last month
+              {Number.isFinite(expensesDelta) ? incomesDelta.toFixed() : 100}%
+              from last month
             </p>
           ) : null}
         </CardContent>
