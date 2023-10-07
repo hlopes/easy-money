@@ -14,8 +14,8 @@ export default function LoadingTable({ title }: LoadingTableProps) {
       <PageTop title={title}>
         <ButtonAdd disabled />
       </PageTop>
-      <div className="overflow-x-auto my-2">
-        <Skeleton className="mt-4 h-40 w-full" />
+      <div className="my-2 overflow-x-auto">
+        <Skeleton className="w-full h-40 mt-4" />
       </div>
     </>
   );

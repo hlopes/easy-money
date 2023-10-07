@@ -40,8 +40,8 @@ export default async function Dashboard() {
   return (
     <>
       <PageTop title="Dashboard" />
-      <h2 className="text-center mb-4">{format(new Date(), 'LLLL y')}</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-4">
+      <h2 className="mb-4 text-center">{format(new Date(), 'LLLL y')}</h2>
+      <div className="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
         <OverviewCards
           totalAccounts={totalAccounts}
           totalIncomes={totalIncomes}
@@ -50,8 +50,8 @@ export default async function Dashboard() {
           expensesDelta={expensesDelta}
         />
       </div>
-      <h2 className="text-center mb-4">{format(new Date(), 'y')}</h2>
-      <div className="grid gap-4 sm:grid-cols-2 mb-4">
+      <h2 className="mb-4 text-center">{format(new Date(), 'y')}</h2>
+      <div className="grid gap-4 mb-4 sm:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Incomes</CardTitle>

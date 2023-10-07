@@ -6,8 +6,8 @@ type PageTopProps = PropsWithChildren & {
 
 export default function PageTop({ title, children }: PageTopProps) {
   return (
-    <section className="prose py-2 w-full flex justify-between">
-      <h2 className="mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
+    <section className="flex justify-between w-full py-2 prose">
+      <h2 className="pb-2 mt-10 text-2xl font-semibold tracking-tight transition-colors scroll-m-20 first:mt-0">
         {title}
       </h2>
       {children}

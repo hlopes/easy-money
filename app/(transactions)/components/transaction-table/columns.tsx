@@ -30,10 +30,10 @@ const getColumns = ({
       const type: string = row.getValue('type');
 
       if (type === TransactionType.EXPENSE) {
-        return <LuArrowDownRight className="h-4 w-4 text-red-600" />;
+        return <LuArrowDownRight className="w-4 h-4 text-red-600" />;
       }
 
-      return <LuArrowUpRight className="h-4 w-4 text-emerald-600" />;
+      return <LuArrowUpRight className="w-4 h-4 text-emerald-600" />;
     },
   },
   {
@@ -59,10 +59,10 @@ const getColumns = ({
       const value: number = row.getValue('value');
 
       if (type === TransactionType.EXPENSE) {
-        return <p className="text-red-600 font-semibold">{value}€</p>;
+        return <p className="font-semibold text-red-600">{value}€</p>;
       }
 
-      return <p className="text-emerald-600 font-semibold">{value}€</p>;
+      return <p className="font-semibold text-emerald-600">{value}€</p>;
     },
   },
   {

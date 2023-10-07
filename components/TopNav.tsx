@@ -16,8 +16,8 @@ export default function TopNav() {
   const { isOpen, toggle } = useSideNav();
 
   return (
-    <div className="fixed top-0 w-full bg-background border-b z-10">
-      <div className="flex h-16 items-center justify-between px-4">
+    <div className="fixed top-0 z-10 w-full border-b bg-background">
+      <div className="flex items-center justify-between h-16 px-4">
         <Button
           className="lg:hidden"
           variant="ghost"
@@ -29,7 +29,7 @@ export default function TopNav() {
             <LuPanelLeftOpen className="w-6 h-6" />
           )}
         </Button>
-        <div className="flex items-center space-x-2 w-full justify-end">
+        <div className="flex items-center justify-end w-full space-x-2">
           <ModeToggle />
           <Button variant="outline" size="icon">
             <UserButton

@@ -59,7 +59,7 @@ export default function TransactionsManager({
       <PageTop title="Transactions">
         <ButtonAdd onClick={handleOpenDialog} />
       </PageTop>
-      <div className="overflow-x-auto my-2">
+      <div className="my-2 overflow-x-auto">
         <TransactionsTable
           transactions={transactions}
           onEdit={(id) => {

@@ -102,7 +102,7 @@ export default function BankAccountForm({
                         !value && 'text-muted-foreground'
                       )}>
                       {value ? format(value, 'PPP') : <span>Pick a date</span>}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>

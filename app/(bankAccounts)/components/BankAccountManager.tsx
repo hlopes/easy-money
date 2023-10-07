@@ -65,7 +65,7 @@ export default function BankAccountManager({
       <PageTop title="Bank Accounts">
         <ButtonAdd onClick={handleOpenDialog} />
       </PageTop>
-      <div className="overflow-x-auto my-2">
+      <div className="my-2 overflow-x-auto">
         <BankAccountsTable columns={columns} bankAccounts={bankAccounts} />
       </div>
       <BankAccountsDialog

@@ -131,7 +131,7 @@ export default function TransactionForm({
                             (category) => category.id === field.value
                           )?.name
                         : 'Select category'}
-                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -260,7 +260,7 @@ export default function TransactionForm({
                         !value && 'text-muted-foreground'
                       )}>
                       {value ? format(value, 'PPP') : <span>Pick a date</span>}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -303,7 +303,7 @@ export default function TransactionForm({
       </form>
     </Form>
   ) : (
-    <h3 className="text-red-600 text-center">
+    <h3 className="text-center text-red-600">
       You need at least one create bank account first
     </h3>
   );

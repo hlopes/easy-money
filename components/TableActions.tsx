@@ -29,12 +29,12 @@ export default function TableActions<T extends { original: { id: string } }>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {isLoading ? (
-          <LuLoader2 className="h-4 w-4 animate-spin" />
+          <LuLoader2 className="w-4 h-4 animate-spin" />
         ) : (
           <Button
             variant="ghost"
             className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
-            <DotsHorizontalIcon className="h-4 w-4" />
+            <DotsHorizontalIcon className="w-4 h-4" />
             <span className="sr-only">Open menu</span>
           </Button>
         )}

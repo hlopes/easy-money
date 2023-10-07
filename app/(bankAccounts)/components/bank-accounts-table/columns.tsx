@@ -34,11 +34,11 @@ const getColumns = ({
       const value: number = row.getValue('balance');
 
       if (value > 0) {
-        return <p className="text-green-600 font-semibold">{value}€</p>;
+        return <p className="font-semibold text-green-600">{value}€</p>;
       }
 
       if (value < 0) {
-        return <p className="text-red-600 font-semibold">{value}€</p>;
+        return <p className="font-semibold text-red-600">{value}€</p>;
       }
 
       return <p className="font-semibold">{value}€</p>;

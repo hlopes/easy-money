@@ -16,7 +16,7 @@ export default function SideNavLink({ Icon, url, name }: SideNavLinkProps) {
   const isActive = pathname === url;
 
   return (
-    <li className="ml-6 mb-6" onClick={close}>
+    <li className="mb-6 ml-6" onClick={close}>
       <Link className="flex space-x-2 group" href={url}>
         <Icon
           className={cn(

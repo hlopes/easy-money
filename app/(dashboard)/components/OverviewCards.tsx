@@ -20,18 +20,18 @@ export default function OverviewCards({
   return (
     <>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">Total Accounts</CardTitle>
-          <LuEuro className="h-4 w-4 text-muted-foreground" />
+          <LuEuro className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{totalAccounts}€</div>
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">Total Incomes</CardTitle>
-          <LuMoveUp className="h-4 w-4 text-muted-foreground" />
+          <LuMoveUp className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-green-600">
@@ -46,9 +46,9 @@ export default function OverviewCards({
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-          <LuMoveDown className="h-4 w-4 text-muted-foreground" />
+          <LuMoveDown className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-red-600">

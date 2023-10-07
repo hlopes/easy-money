@@ -10,7 +10,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
     <>
       <TopNav />
       <SideNav />
-      <main className="pt-20 w-full lg:pl-64 max-h-screen overflow-hidden">
+      <main className="w-full max-h-screen pt-20 overflow-hidden lg:pl-64">
         <div className="container h-[calc(100vh-64px)] overflow-y-auto">
           {children}
         </div>
