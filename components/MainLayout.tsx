@@ -3,12 +3,18 @@ import type { PropsWithChildren } from 'react';
 import SideNav from '@/components/SideNav';
 import { Toaster } from '@/components/ui/toaster';
 
-export default async function MainLayout({ children }: PropsWithChildren) {
+import TopNav from './TopNav';
+
+export default function MainLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <SideNav>
-        <main className="container mt-2 px-4 max-w-4xl">{children}</main>
-      </SideNav>
+      <TopNav />
+      <SideNav />
+      <main className="pt-16 w-full lg:pl-64 max-h-screen overflow-hidden">
+        <div className="container h-[calc(100vh-64px)] overflow-y-auto">
+          {children}
+        </div>
+      </main>
       <Toaster />
     </>
   );

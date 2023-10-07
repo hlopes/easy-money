@@ -49,7 +49,7 @@ type CategoriesChartProps = {
 export default function CategoriesChart({ data }: CategoriesChartProps) {
   return (
     <ResponsiveContainer width={'100%'} height={200}>
-      <PieChart width={200} height={200}>
+      <PieChart>
         <Pie
           data={data}
           cx={'50%'}

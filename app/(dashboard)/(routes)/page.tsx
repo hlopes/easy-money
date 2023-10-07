@@ -50,8 +50,8 @@ export default async function Dashboard() {
           expensesDelta={expensesDelta}
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 mb-4">
-        <Card className="w-full">
+      <div className="grid gap-4 sm:grid-cols-2 mb-4">
+        <Card>
           <CardHeader>
             <CardTitle>Incomes</CardTitle>
           </CardHeader>
@@ -59,7 +59,7 @@ export default async function Dashboard() {
             <CategoriesChart data={totalIncomesByCategoryAndYear} />
           </CardContent>
         </Card>
-        <Card className="w-full">
+        <Card>
           <CardHeader>
             <CardTitle>Expenses</CardTitle>
           </CardHeader>
@@ -68,7 +68,7 @@ export default async function Dashboard() {
           </CardContent>
         </Card>
       </div>
-      <Card className="w-full">
+      <Card>
         <CardHeader>
           <CardTitle>{format(new Date(), 'y')}</CardTitle>
         </CardHeader>
