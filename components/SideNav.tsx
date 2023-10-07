@@ -1,7 +1,6 @@
 'use client';
 
 import { LuActivity, LuBriefcase, LuLayoutDashboard } from 'react-icons/lu';
-import Link from 'next/link';
 
 import { useSideNav } from '@/hooks';
 import { cn } from '@/lib/utils';
@@ -32,7 +31,7 @@ export default function SideNav() {
             />
             <SideNavLink
               Icon={LuActivity}
-              url="/transaction"
+              url="/transactions"
               name="Transactions"
             />
           </ul>

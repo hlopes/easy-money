@@ -50,6 +50,7 @@ export default async function Dashboard() {
           expensesDelta={expensesDelta}
         />
       </div>
+      <h2 className="text-center mb-4">{format(new Date(), 'y')}</h2>
       <div className="grid gap-4 sm:grid-cols-2 mb-4">
         <Card>
           <CardHeader>
@@ -70,7 +71,7 @@ export default async function Dashboard() {
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>{format(new Date(), 'y')}</CardTitle>
+          <CardTitle>By month</CardTitle>
         </CardHeader>
         <CardContent className="pl-2">
           <YearChart data={totalsByMonth} />

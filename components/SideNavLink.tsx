@@ -1,5 +1,8 @@
 import type { ComponentType } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { cn } from '@/lib/utils';
 
 type SideNavLinkProps = {
   Icon: ComponentType<{ className: string }>;
@@ -8,11 +11,23 @@ type SideNavLinkProps = {
 };
 
 export default function SideNavLink({ Icon, url, name }: SideNavLinkProps) {
+  const pathname = usePathname();
+
+  const isActive = pathname === url;
+
   return (
     <li className="ml-6 mb-6" onClick={close}>
       <Link className="flex space-x-2 group" href={url}>
-        <Icon className="h-6 w-6 text-muted-foreground group-hover:text-foreground" />
-        <span className="text-muted-foreground group-hover:text-foreground">
+        <Icon
+          className={cn(
+            'h-6 w-6',
+            !isActive && 'text-muted-foreground group-hover:text-foreground'
+          )}
+        />
+        <span
+          className={
+            !isActive ? 'text-muted-foreground group-hover:text-foreground' : ''
+          }>
           {name}
         </span>
       </Link>
