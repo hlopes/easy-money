@@ -13,7 +13,7 @@ export default function SideNav() {
   return (
     <>
       {/* Navigation */}
-      <div
+      <aside
         className={cn(
           'fixed mt-[65px] inset-y-0 left-0 w-64 h-screen bg-white dark:bg-background shadow-md transform transition-transform duration-300 ease-in-out border-r-2 lg:mt-0 z-20',
           !isOpen && '-translate-x-full lg:-translate-x-0'
@@ -33,7 +33,7 @@ export default function SideNav() {
             />
           </ul>
         </nav>
-      </div>
+      </aside>
 
       {/* Backdrop */}
       <div
