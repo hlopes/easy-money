@@ -37,8 +37,6 @@ export default async function Dashboard() {
     user?.id
   );
 
-  console.log('### totalsByMonth', totalsByMonth.length);
-
   return (
     <>
       <PageTop title="Dashboard" />
