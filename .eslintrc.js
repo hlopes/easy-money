@@ -1,5 +1,9 @@
 module.exports = {
-  extends: 'next/core-web-vitals',
+  extends: [
+    'next/core-web-vitals',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -107,5 +111,7 @@ module.exports = {
     'commitlint.config.js',
     '.eslintrc.js',
     'postcss.config.js',
+    'jest.config.mjs',
+    'jest.setup.js',
   ],
 };
