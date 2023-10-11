@@ -1,3 +1,4 @@
+import { LuArrowLeftCircle } from 'react-icons/lu';
 import { format } from 'date-fns';
 import { currentUser } from '@clerk/nextjs';
 
@@ -36,6 +37,18 @@ export default async function Dashboard() {
     TransactionType.EXPENSE,
     user?.id
   );
+
+  if (totalAccounts === 0 && totalIncomes === 0 && totalExpenses === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100%-64px)] space-y-6">
+        <p className="text-2xl font-light text-center">
+          Please add some back account and transactions information using the
+          side navigation bar{' '}
+        </p>
+        <LuArrowLeftCircle className="w-8 h-8 animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <>
