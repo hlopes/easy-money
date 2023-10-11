@@ -8,12 +8,6 @@ describe('ButtonAdd', () => {
   it('displays', async () => {
     render(<ButtonAdd />);
 
-    // // ACT
-    // await userEvent.click(screen.getByText('Load Greeting'));
-
-    // await screen.findByRole('heading');
-
-    // ASSERT
-    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add New' })).toBeInTheDocument();
   });
 });
