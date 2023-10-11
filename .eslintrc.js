@@ -1,8 +1,8 @@
 module.exports = {
   extends: [
     'next/core-web-vitals',
-    'plugin:testing-library/react',
     'plugin:jest-dom/recommended',
+    'plugin:testing-library/react',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -11,10 +11,11 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
     'import',
+    'jsx-a11y',
     'react',
     'react-hooks',
-    'jsx-a11y',
     'simple-import-sort',
+    'testing-library',
   ],
   rules: {
     'import/group-exports': 'error',
@@ -63,6 +64,9 @@ module.exports = {
     'no-console': 'error',
     'no-var': 'error',
     'no-unused-vars': 'off',
+    'react/display-name': 'error',
+    'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'simple-import-sort/imports': [
@@ -114,4 +118,12 @@ module.exports = {
     'jest.config.mjs',
     'jest.setup.js',
   ],
+  globals: {
+    expect: true,
+    describe: true,
+    it: true,
+    beforeEach: true,
+    afterEach: true,
+    jest: true,
+  },
 };
