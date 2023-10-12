@@ -3,6 +3,7 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:jest-dom/recommended',
     'plugin:testing-library/react',
+    'plugin:deprecation/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

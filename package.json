@@ -72,6 +72,7 @@
     "commitlint": "^17.7.2",
     "eslint": "^8.47.0",
     "eslint-config-next": "^13.4.13",
+    "eslint-plugin-deprecation": "^2.0.0",
     "eslint-plugin-jest-dom": "^5.1.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-testing-library": "^6.0.2",
